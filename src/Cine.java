@@ -1,11 +1,7 @@
 import java.util.ArrayList;
 
 public class Cine {
-<<<<<<< HEAD
     String nombre;
-=======
-  String nombre;
->>>>>>> 490a302434562231a6dfea9ddf3d9d9fe563eecc
     int nit;
     String direccion;
     ArrayList<Sala> salas;
@@ -16,11 +12,10 @@ public class Cine {
         this.nombre = nombre;
         this.nit = nit;
         this.direccion = direccion;
-        this.peliculas = new ArrayList<Pelicula>();
-        this.salas = new ArrayList<Sala>();
-        this.empleados = new ArrayList<Empleado>();
+        this.peliculas = new ArrayList<>();
+        this.salas = new ArrayList<>();
+        this.empleados = new ArrayList<>();
     }
-<<<<<<< HEAD
 
     /*public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -40,22 +35,20 @@ public class Cine {
         this.direccion = direccion;
     }*/
 
-    public void getAddSala(){
-=======
-  
-  public void getAddSala(){
->>>>>>> 490a302434562231a6dfea9ddf3d9d9fe563eecc
+//Métodos para agregar objetos a los ArrayList
+    public void AddSala(Sala sala){
         salas.add(sala);
     }
 
-    public void getAddPelicula(){
+    public void AddPelicula(Pelicula pelicula){
         cartelera.add(pelicula);
     }
 
-    public void getAddEmpleado(){
+    public void AddEmpleado(Empleado empleado){
         empleados.add(empleado);
     }
 
+//Métodos para obtener el tamaño de los ArrayList    
     public int getSalaSize(){
         return salas.size();
     }
