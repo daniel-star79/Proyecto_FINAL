@@ -1,7 +1,11 @@
 import java.util.ArrayList;
 
 public class Cine {
+<<<<<<< HEAD
     String nombre;
+=======
+  String nombre;
+>>>>>>> 490a302434562231a6dfea9ddf3d9d9fe563eecc
     int nit;
     String direccion;
     ArrayList<Sala> salas;
@@ -16,6 +20,7 @@ public class Cine {
         this.salas = new ArrayList<Sala>();
         this.empleados = new ArrayList<Empleado>();
     }
+<<<<<<< HEAD
 
     /*public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -36,6 +41,10 @@ public class Cine {
     }*/
 
     public void getAddSala(){
+=======
+  
+  public void getAddSala(){
+>>>>>>> 490a302434562231a6dfea9ddf3d9d9fe563eecc
         salas.add(sala);
     }
 
