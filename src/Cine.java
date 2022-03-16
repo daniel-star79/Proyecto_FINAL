@@ -9,7 +9,7 @@ public class Cine {
     int nit;
     String direccion;
     ArrayList<Sala> salas;
-    ArrayList<Pelicula> peliculas;
+    ArrayList<Pelicula> cartelera;
     ArrayList<Empleado> empleados;
 
     public Cine (String nombre, int nit, String direccion){
@@ -49,7 +49,7 @@ public class Cine {
     }
 
     public void getAddPelicula(){
-        peliculas.add(pelicula);
+        cartelera.add(pelicula);
     }
 
     public void getAddEmpleado(){
@@ -61,7 +61,7 @@ public class Cine {
     }
 
     public int getPeliculasSize(){
-        return peliculas.size();
+        return cartelera.size();
     }
 
     public int getEmpleadosSize(){
