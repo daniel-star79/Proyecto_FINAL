@@ -56,7 +56,6 @@ public class Pelicula {
     }
 }
 
-// este es un comentario :)
-// este es un comentario 2  :)
+// comentario
 sistem.out.printl("hola")
 
