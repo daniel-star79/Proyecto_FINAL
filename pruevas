@@ -1,0 +1,21 @@
+/**
+        public void addEmpleado(){
+            int numeroaciento = 100;
+            int columnas = 10;
+            int fila  = 100 / 10;
+            int fila1 = fila;
+            Asientos  asiento [][] = new Asientos[ fila+1][columnas+1];
+            int count  = 1;
+            String letra = 'a';
+
+            while(count<fila) {
+                for (int i = 1; i < 11; i++) {
+                    Asientos asientosi = new Asientos(letra,i);
+                    asiento[count][i] = asientosi;
+                    System.out.print("["+asiento[count][i].getNumeroAciento()+asiento[count][i].getLetraFila()+asiento[count][i].estado+"]");
+                }
+                letra++;
+                System.out.println("");
+                count++;
+            }
+        }*/

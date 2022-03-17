@@ -1,4 +1,4 @@
-public enum Genero {
+/*public enum Genero {
     ANIMACION , TERROR;
 }
 public class Puntos {
@@ -10,3 +10,4 @@ public class Puntos {
         this.cantidadEntradas=cantidadEntradas;
     }
 }
+*/
