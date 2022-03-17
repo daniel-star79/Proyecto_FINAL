@@ -1,50 +1,34 @@
 import java.util.ArrayList;
-
 public class Boleteria {
     //Tipo pago;
     String tipoDePago;
     String pelicula;
-    String hora;
+    Horario horario;
     String dia;
-    String tipoPelicula;
+    String calidadPelicula;
     int cantidadBoletos;
-    int cantidadAsientos;
-    public Boleteria(String pelicula , String hora , String tipoPelicula  )
-    {
+    Cliente cliente;
 
-        this.tipoPelicula=tipoPelicula;
+
+
+    public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
+        this.calidadPelicula = calidadPelicula;
         this.pelicula=pelicula;
-        this.hora=hora;
-
+        this.horario =horario;
+        this.dia = dia;
     }
 
-  import java.util.ArrayList;
 
-public class Boleteria {
-    //Tipo pago;
-    String tipoDePago;
-    String pelicula;
-    String hora;
-    String dia;
-    String tipoPelicula;
-    int cantidadBoletos;
-    int cantidadAsientos;
-    public Boleteria(String pelicula , String hora , String tipoPelicula  )
-    {
 
-        this.tipoPelicula=tipoPelicula;
-        this.pelicula=pelicula;
-        this.hora=hora;
 
-    }
 
-    public Boleteria(int cantidadAsientos ,String tipoDePago)
-    {
+
+/*
+    public Boleteria(int cantidadAsientos ,String tipoDePago){
         this.tipoDePago=tipoDePago;
         this.cantidadAsientos=cantidadAsientos;
     }
-
-
+*/
 
 
 

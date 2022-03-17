@@ -6,7 +6,7 @@ public class Sala {
 
         String IDSala;
         ArrayList<Asientos> listaAsientos;
-        int capacidad = 100;
+        int capacidad ;
 
 
     public Sala(String IDSala, int capacidad){
@@ -24,6 +24,7 @@ public class Sala {
         }
 
         public String CrearAsientos(){
+
                 int filas  = capacidad / 10 , count = 0 ;
                 String letraFila  = "A", asientos= "";
                 for(int i = 1 ;i<11;i++){
