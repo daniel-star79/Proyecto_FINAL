@@ -1,26 +1,26 @@
 public class Asientos {
     // write your code here
-    String ID = null;
-    boolean estado = false;
-
-    public Asientos(String ID, Boolean estado) {
-        this.ID = ID;
-        this.estado = estado;
+    String  letraFila ;
+    int numeroAciento;
+    boolean estado = true ;
+    public Asientos(String Fila , int numeroAciento){
+        this.letraFila = Fila;
+        this.numeroAciento  = numeroAciento;
     }
 
-    public String getID() {
-        return ID;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public boolean getEstado() {
         return estado;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public int getNumeroAciento() {
+        return numeroAciento;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public String getLetraFila() {
+        return letraFila;
     }
 }

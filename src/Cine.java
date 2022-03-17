@@ -8,7 +8,7 @@ public class Cine {
     ArrayList<Pelicula> cartelera;
     ArrayList<Empleado> empleados;
 
-    public Cine (String nombre, int nit, String direccion){
+    public Cine(String nombre, int nit, String direccion){
         this.nombre = nombre;
         this.nit = nit;
         this.direccion = direccion;
