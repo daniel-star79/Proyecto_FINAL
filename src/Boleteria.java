@@ -16,7 +16,8 @@ public class Boleteria {
         // this.pelicula=pelicula;
         //zthis.horario =horario;
         this.dia = dia;
-         Butaca = new ArrayList<>();
+        Butaca = new ArrayList<>();
+        Sala sala;
     }
 
 
@@ -31,6 +32,17 @@ public class Boleteria {
         return Butaca;
     }
 
+    public void comprarAsiento(){
+        System.out.println("\nQue asiento comprara? : \n");
+        int asiento = sn.nextInt();
+        if (sala.listaAsientos.get(asiento).estado){
+            sala.listaAsientos.get(asiento).estado = false;
+        }
+        else {
+            System.out.println("El asiento no esta disponible ");;
+        }
+    }
+    
     // DATOS A MEJORAR
 
 
