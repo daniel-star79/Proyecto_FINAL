@@ -5,6 +5,7 @@ public class TestCine {
 
     @Test
     public void TestCine(){
+
         Sala sala1 = new Sala("A",100);
         System.out.println(sala1.CrearAsientos());
         Sala sala2 = new Sala("B",100);
@@ -30,6 +31,4 @@ public class TestCine {
         Pelicula pelicula6 = new Pelicula(Genero.ACCION,"Los Vengadores","3 horas",Horario.MAÑANA,Restriccion.edad3);
         Pelicula pelicula7 = new Pelicula(Genero.ANIMACION,"El Rey León","2 horas",Horario.NOCHE,Restriccion.edad1);
 
-
-    }
 }

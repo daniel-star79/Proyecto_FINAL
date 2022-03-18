@@ -1,8 +1,3 @@
-
-/*public enum TipoDePago {
-    EFECTIVO , TARJETA_DE_CREDITO , TARJETA_DE_DEBITO , QR ,PUNTOS ;
-}
 public enum TipoDePago {
     EFECTIVO , TARJETA_DE_CREDITO , TARJETA_DE_DEBITO , QR ,PUNTOS ;
 }
-*/
