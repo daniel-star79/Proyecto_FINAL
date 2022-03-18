@@ -10,24 +10,23 @@ public class Boleteria {
     Cliente cliente;
     ArrayList <String> Butaca;
 
-
-    public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
+//  public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
+    public Boleteria(String calidadPelicula , String dia ){
         this.calidadPelicula = calidadPelicula;
-        this.pelicula=pelicula;
-        this.horario =horario;
+        // this.pelicula=pelicula;
+        //zthis.horario =horario;
         this.dia = dia;
          Butaca = new ArrayList<>();
     }
 
 
-    public ArrayList<String> MuestraButaca(ArrayList<Pelicula> peliculas, ArrayList<Sala> listasalas,int excibiciones) {
-        int countExcibiciones = excibiciones;
+    public ArrayList<String> MuestraButaca(ArrayList<Pelicula> peliculas, ArrayList<Sala> listasalas) {
         for (int i = 0; i < listasalas.size(); i++) {
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " \n " + Horario.MAÑANA.toString());
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " \n " + Horario.TARDE.toString());
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " \n " + Horario.NOCHE.toString());
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " \n " + Horario.PRENOCHE.toString());
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " \n " + Horario.MAÑANA.toString());
+            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.MAÑANA.toString()  +"\n");
+            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.TARDE.toString()   +"\n");
+            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.NOCHE.toString()   +"\n");
+            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.PRENOCHE.toString()+"\n");
+            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.MAÑANA.toString()  +"\n");
         }
         return Butaca;
     }
