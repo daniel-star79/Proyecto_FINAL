@@ -38,4 +38,6 @@ public class TestCine {
         Asientos asientos = new Asientos("A",1);
         asientos.setEstado(false);
     }
+    //ff
 }
+
