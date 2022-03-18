@@ -24,7 +24,7 @@ public class TestCine {
         System.out.println(sala7.CrearAsientos());
     }
 
-<<<<<<< HEAD
+
     @Test
     public void TestPelicula() {
         Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA, Restriccion.edad1);
@@ -50,15 +50,11 @@ public class TestCine {
         cine.AddSala(sala3);
         cine.AddSala(sala4);
 
-=======
-    @Test
-    public void TestPelicula() {
->>>>>>> 12cd1bdb04796679f3e35073a5df27c066e44831
+
         Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA, Restriccion.edad1);
         Pelicula pelicula2 = new Pelicula(Genero.CIENCIAFICCION, "Batman", "3 horas", Horario.TARDE, Restriccion.edad4);
         Pelicula pelicula3 = new Pelicula(Genero.FANTACIA, "El mago de Oz", "2:30 horas", Horario.PRENOCHE, Restriccion.edad1);
         Pelicula pelicula4 = new Pelicula(Genero.DRAMA, "Casablanca", "1 horas", Horario.NOCHE, Restriccion.edad1);
-<<<<<<< HEAD
         cine.AddPelicula(pelicula1);
         cine.AddPelicula(pelicula2);
         cine.AddPelicula(pelicula3);
@@ -66,12 +62,10 @@ public class TestCine {
         Boleteria boleteria = new Boleteria("2D", "Martes");
         ArrayList<String> butaca  = boleteria.MuestraButaca(cine.cartelera,cine.salas);
         System.out.println(butaca);
-    }
-=======
+
         Pelicula pelicula5 = new Pelicula(Genero.SUSPENSO, "El padrino", "3:30 horas", Horario.TARDE, Restriccion.edad2);
         Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA, Restriccion.edad3);
         Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, Restriccion.edad1);
->>>>>>> 12cd1bdb04796679f3e35073a5df27c066e44831
 
     }
     @Test
