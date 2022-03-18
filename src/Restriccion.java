@@ -1,7 +1,9 @@
 public enum Restriccion {
     edad1(15),
     edad2(16),
-    edad3(18);
+    edad3(18),
+    edad4(10);
+
 
     private int restriccion;
 
