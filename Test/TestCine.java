@@ -63,9 +63,6 @@ public class TestCine {
         ArrayList<String> butaca  = boleteria.MuestraButaca(cine.cartelera,cine.salas);
         System.out.println(butaca);
 
-        Pelicula pelicula5 = new Pelicula(Genero.SUSPENSO, "El padrino", "3:30 horas", Horario.TARDE, Restriccion.edad2);
-        Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA, Restriccion.edad3);
-        Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, Restriccion.edad1);
 
     }
     @Test
