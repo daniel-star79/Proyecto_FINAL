@@ -14,8 +14,9 @@ public class Cine {
         this.nit = nit;
         this.direccion = direccion;
        // this.peliculas = new ArrayList<>();
-        this.salas = new ArrayList<>();
-        this.empleados = new ArrayList<>();
+        salas = new ArrayList<>();
+        empleados = new ArrayList<>();
+        cartelera = new ArrayList<>();
     }
 
     public void setNombre(String nombre) {

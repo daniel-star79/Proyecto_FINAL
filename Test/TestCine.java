@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import java.util.ArrayList;
 
 
 public class TestCine {
@@ -39,6 +40,7 @@ public class TestCine {
     @Test
     public void MostrarPelicula(){
         Cine cine = new Cine("CENTER ", 73238,"AV.AMERICA" );
+
 
         Sala sala1 = new Sala("A",100);
         Sala sala2 = new Sala("B",100);

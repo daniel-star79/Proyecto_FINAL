@@ -15,5 +15,4 @@ public enum Horario {
     public String toString(){
         return "horario = " + horario;
     }
-
 }

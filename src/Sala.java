@@ -4,13 +4,13 @@ public class Sala {
 
         // write your code here
 
-        String IDSala;
+        String IDSala = "SALA-" ;
         ArrayList<Asientos> listaAsientos;
         int capacidad ;
 
 
     public Sala(String IDSala, int capacidad){
-            this.IDSala = IDSala;
+            this.IDSala += IDSala;
             this.capacidad = capacidad;
             listaAsientos = new ArrayList<>();
         }
