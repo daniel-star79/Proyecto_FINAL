@@ -5,9 +5,9 @@ public class Pelicula {
     public String nombrePelicula;
     public String duracion;
     public Horario horario;
-    public Restriccion restriccion;
+    public int  restriccion;
 
-    public Pelicula(Genero genero, String nombrePelicula, String duracion, Horario horario, Restriccion restriccion){
+    public Pelicula(Genero genero, String nombrePelicula, String duracion, Horario horario, int  restriccion){
         this.genero = genero;
         this.nombrePelicula = nombrePelicula;
         this.duracion = duracion;
@@ -31,7 +31,7 @@ public class Pelicula {
         return horario;
     }
 
-    public Restriccion getRestriccion() {
+    public int  getRestriccion() {
         return restriccion;
     }
 
@@ -51,7 +51,7 @@ public class Pelicula {
         this.horario = horario;
     }
 
-    public void setRestriccion(Restriccion restriccion) {
+    public void setRestriccion(int  restriccion) {
         this.restriccion = restriccion;
     }
 }

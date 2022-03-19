@@ -2,6 +2,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
+import static org.testng.AssertJUnit.assertEquals;
+
 
 public class TestCine {
 
@@ -27,13 +29,13 @@ public class TestCine {
 
     @Test
     public void TestPelicula() {
-        Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA, Restriccion.edad1);
-        Pelicula pelicula2 = new Pelicula(Genero.CIENCIAFICCION, "Batman", "3 horas", Horario.TARDE, Restriccion.edad4);
-        Pelicula pelicula3 = new Pelicula(Genero.FANTACIA, "El mago de Oz", "2:30 horas", Horario.PRENOCHE, Restriccion.edad1);
-        Pelicula pelicula4 = new Pelicula(Genero.DRAMA, "Casablanca", "1 horas", Horario.NOCHE, Restriccion.edad1);
-        Pelicula pelicula5 = new Pelicula(Genero.SUSPENSO, "El padrino", "3:30 horas", Horario.TARDE, Restriccion.edad2);
-        Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA, Restriccion.edad3);
-        Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, Restriccion.edad1);
+        Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA,  16);
+        Pelicula pelicula2 = new Pelicula(Genero.CIENCIAFICCION, "Batman", "3 horas", Horario.TARDE,    16);
+        Pelicula pelicula3 = new Pelicula(Genero.FANTACIA, "El mago de Oz", "2:30 horas", Horario.PRENOCHE, 16);
+        Pelicula pelicula4 = new Pelicula(Genero.DRAMA, "Casablanca", "1 horas", Horario.NOCHE,       16);
+        Pelicula pelicula5 = new Pelicula(Genero.SUSPENSO, "El padrino", "3:30 horas", Horario.TARDE, 16);
+        Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA,  16);
+        Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, 16);
     }
 
     @Test
@@ -51,15 +53,15 @@ public class TestCine {
         cine.AddSala(sala4);
 
 
-        Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA, Restriccion.edad1);
-        Pelicula pelicula2 = new Pelicula(Genero.CIENCIAFICCION, "Batman", "3 horas", Horario.TARDE, Restriccion.edad4);
-        Pelicula pelicula3 = new Pelicula(Genero.FANTACIA, "El mago de Oz", "2:30 horas", Horario.PRENOCHE, Restriccion.edad1);
-        Pelicula pelicula4 = new Pelicula(Genero.DRAMA, "Casablanca", "1 horas", Horario.NOCHE, Restriccion.edad1);
+        Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA, 18);
+        Pelicula pelicula2 = new Pelicula(Genero.CIENCIAFICCION, "Batman", "3 horas", Horario.TARDE, 17);
+        Pelicula pelicula3 = new Pelicula(Genero.FANTACIA, "El mago de Oz", "2:30 horas", Horario.PRENOCHE, 15);
+        Pelicula pelicula4 = new Pelicula(Genero.DRAMA, "Casablanca", "1 horas", Horario.NOCHE, 12);
         cine.AddPelicula(pelicula1);
         cine.AddPelicula(pelicula2);
         cine.AddPelicula(pelicula3);
         cine.AddPelicula(pelicula4);
-        Boleteria boleteria = new Boleteria("2D", "Martes");
+        Boleteria boleteria = new Boleteria(25,35);
         ArrayList<String> butaca  = boleteria.MuestraButaca(cine.cartelera,cine.salas);
         System.out.println(butaca);
 
@@ -69,5 +71,21 @@ public class TestCine {
     public void TestAsiento(){
         Asientos asientos = new Asientos("A",1);
         asientos.setEstado(false);
+    }
+    @Test
+    public void TestSouvenirs(){
+        Boleteria boleteria = new Boleteria(25,35);
+        boleteria.addsouvenirs("gorra");
+    }
+    //String nombrePersona ,  String carnetIdentidad , String fechaNacimiento,String correoElectronico)
+
+    @Test
+    public void TestPuntos(){
+        Cliente personaRegistrada = new Cliente("JUAN",836839,"12/09/1999","Daniel92@gmail.com");
+        int puntos  = personaRegistrada.MostrarPuntos();
+        assertEquals(0,puntos);
+        personaRegistrada.addPuntos(7,50,50);
+
+        System.out.println(personaRegistrada.MostrarPuntos());
     }
 }
