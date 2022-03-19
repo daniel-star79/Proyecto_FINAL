@@ -78,9 +78,9 @@ public class TestCine {
     @Test
     public void TestCangear() {
         Boleteria boleteria = new Boleteria("3D","lunes");
-        Puntos cangeo1 = new Puntos(500, Canjear.ENTRADAS);
-        Puntos cangeo2 = new Puntos(300, Canjear.CANDY_BAR);
-        Puntos cangeo3 = new Puntos(200, Canjear.GOLOSINAS);
+        Puntos cangeo1 = new Puntos(500, "Boletos");
+        Puntos cangeo2 = new Puntos(300, "Golocinas" );
+        Puntos cangeo3 = new Puntos(200, "comida");
 
         boleteria.AddCangeo(cangeo1);
         boleteria.AddCangeo(cangeo1);
