@@ -59,8 +59,8 @@ public class TestCine {
         cine.AddPelicula(pelicula2);
         cine.AddPelicula(pelicula3);
         cine.AddPelicula(pelicula4);
-        Boleteria boleteria = new Boleteria("2D", "Martes");
-        //ArrayList<String> butaca  = boleteria.MuestraButaca(cine.cartelera,cine.salas);
+        Boleteria boleteria = new Boleteria(35,50);
+        ArrayList<String> butaca  = boleteria.MuestraButaca(cine.cartelera,cine.salas);
         System.out.println(butaca);
 
 

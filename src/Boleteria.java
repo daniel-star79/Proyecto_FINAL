@@ -8,24 +8,28 @@ public class Boleteria {
     String calidadPelicula;
     int cantidadBoletos;
     Cliente cliente;
+    Sala sala;
+    ArrayList <String> Butaca;
+    ArrayList <String> souvenirs;
+    int puntos_por_compra  = 50;
+    int precio_2D , precio3D;
     ArrayList<Puntos> cangeo;
 
-
-    public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
-    ArrayList <String> Butaca;
-
-//  public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
-    public Boleteria(String calidadPelicula , String dia ){
+    //  public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
+    public Boleteria(int precio3D, int precio_2D){
         this.calidadPelicula = calidadPelicula;
         // this.pelicula=pelicula;
         //zthis.horario =horario;
-        this.dia = dia;
-
+        this.precio3D = precio3D;
+        this.precio_2D = precio_2D;
         Butaca = new ArrayList<>();
+        souvenirs = new ArrayList<>();
         Sala sala;
-        cangeo = new ArrayList<>();
+    }
+    public void ActualizarDia(String dia){
+        dia  = dia ;
+    }
 
-        }
 
 
     public ArrayList<String> MuestraButaca(ArrayList<Pelicula> peliculas, ArrayList<Sala> listasalas) {
