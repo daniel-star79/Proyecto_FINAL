@@ -8,7 +8,7 @@ public class Boleteria {
     String calidadPelicula;
     int cantidadBoletos;
     Cliente cliente;
-
+    ArrayList<Puntos> cangeo;
 
 
     public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
@@ -16,6 +16,8 @@ public class Boleteria {
         this.pelicula=pelicula;
         this.horario =horario;
         this.dia = dia;
+        cangeo = new ArrayList<>();
+
     }
 
 
@@ -30,7 +32,12 @@ public class Boleteria {
     }
 */
 
-
+    public int getPeliculasSize(){
+        return cangeo.size();
+    }
+    public void AddCangeo(Puntos Puntos){
+        cangeo.add(Puntos);
+    }
 
 
 }
