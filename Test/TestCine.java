@@ -7,6 +7,7 @@ import static org.testng.AssertJUnit.assertEquals;
 
 public class TestCine {
 
+
     @Test
     public void TestCine() {
 

@@ -14,6 +14,7 @@ public class Boleteria {
     ArrayList <String> souvenirs;
     int puntos_por_compra  = 50;
     int precio_2D , precio3D;
+
 //  public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
     public Boleteria(int precio3D, int precio_2D){
         this.calidadPelicula = calidadPelicula;
