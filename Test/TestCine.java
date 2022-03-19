@@ -1,6 +1,5 @@
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 
 
@@ -40,8 +39,7 @@ public class TestCine {
     @Test
     public void MostrarPelicula(){
         Cine cine = new Cine("CENTER ", 73238,"AV.AMERICA" );
-
-
+        
         Sala sala1 = new Sala("A",100);
         Sala sala2 = new Sala("B",100);
         Sala sala3 = new Sala("C",100);
@@ -65,9 +63,6 @@ public class TestCine {
         ArrayList<String> butaca  = boleteria.MuestraButaca(cine.cartelera,cine.salas);
         System.out.println(butaca);
 
-        Pelicula pelicula5 = new Pelicula(Genero.SUSPENSO, "El padrino", "3:30 horas", Horario.TARDE, Restriccion.edad2);
-        Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA, Restriccion.edad3);
-        Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, Restriccion.edad1);
 
     }
     @Test
@@ -75,19 +70,4 @@ public class TestCine {
         Asientos asientos = new Asientos("A",1);
         asientos.setEstado(false);
     }
-    @Test
-    public void TestCangear() {
-        Boleteria boleteria = new Boleteria("3D","lunes");
-        Puntos cangeo1 = new Puntos(500, "Boletos");
-        Puntos cangeo2 = new Puntos(300, "Golocinas" );
-        Puntos cangeo3 = new Puntos(200, "comida");
-
-        boleteria.AddCangeo(cangeo1);
-        boleteria.AddCangeo(cangeo1);
-        boleteria.AddCangeo(cangeo1);
-
-        assertEquals(500, cangeo1.cantidadPuntos);
-
-    }
 }
-
