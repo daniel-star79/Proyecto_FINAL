@@ -32,9 +32,7 @@ public class Boleteria {
         return Butaca;
     }
 
-    public void comprarAsiento(){
-        System.out.println("\nQue asiento comprara? : \n");
-        int asiento = sn.nextInt();
+    public void comprarAsiento(Sala sala, int asiento, int numeroAsientos){
         if (sala.listaAsientos.get(asiento).estado){
             sala.listaAsientos.get(asiento).estado = false;
         }
