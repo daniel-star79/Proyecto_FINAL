@@ -11,6 +11,18 @@ public class Cliente extends Persona {
         this.correoElectronico = correoElectronico;
     }
 
+    public void AñadirPersonaCorreo(String correoElectronico){
+        this.correoElectronico = correoElectronico;
+    }
+
+    public String MostrarDatosCliente(){
+        return  "nombre Persona : "+nombrePersona+"\n"+
+                "carnet de Identidad : "+carnetIdentidad+"\n"+
+                "fecha Nacimiento : "+fechaNacimiento+"\n"+
+                "correoElectronico : "+correoElectronico+"\n"+
+                "Puntos Acumulados : "+cantidadpuntos+"\n";
+    }
+
 
     public void  addPuntos(int entradas , int puntos_x_compra){
         cantidadpuntos = entradas*puntos_x_compra;
@@ -21,9 +33,5 @@ public class Cliente extends Persona {
     }
     public int MostrarPuntos(){
         return cantidadpuntos;
-    }
-
-    public void addCorreoElectronico(){
-
     }
 }

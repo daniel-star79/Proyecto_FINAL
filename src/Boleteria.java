@@ -1,19 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Boleteria {
-    //Tipo pago;
-    String tipoDePago;
-    String pelicula;
-    Horario horario;
-    String dia;
     String calidadPelicula;
-    int cantidadBoletos;
-    Cliente cliente;
-    Sala sala;
     ArrayList <String> Butaca;
     ArrayList <String> souvenirs;
-    int puntos_por_compra  = 50;
+    int puntos_por_compra ;
     int precio_2D , precio3D;
+    ArrayList<Cliente>listaclientes;
 
 //  public Boleteria(String pelicula , Horario horario , String calidadPelicula, Cliente cliente){
     public Boleteria(int precio3D, int precio_2D){
@@ -24,6 +17,7 @@ public class Boleteria {
         this.precio_2D = precio_2D;
         Butaca = new ArrayList<>();
         souvenirs = new ArrayList<>();
+        listaclientes = new ArrayList<>();
         Sala sala;
     }
     public void ActualizarDia(String dia){
@@ -55,6 +49,11 @@ public class Boleteria {
     public void addsouvenirs(String souvenir){
         souvenirs.add(souvenir);
     }
+
+    public void RegistarCliente(Cliente cliente){
+        listaclientes.add(cliente);
+    }
+
     // DATOS A MEJORAR
 
 
