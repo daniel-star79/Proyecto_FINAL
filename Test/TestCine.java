@@ -2,8 +2,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.testng.AssertJUnit.assertEquals;
-
+import static org.junit.Assert.assertEquals;
 
 public class TestCine {
 
@@ -87,5 +86,7 @@ public class TestCine {
         personaRegistrada.addPuntos(7,50,50);
 
         System.out.println(personaRegistrada.MostrarPuntos());
+        System.out.println(personaRegistrada.MostrarPuntos());
+
     }
 }
