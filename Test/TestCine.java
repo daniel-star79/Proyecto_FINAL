@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -107,5 +108,12 @@ public class TestCine {
         persona1.addPuntos(7, 50, 50);
 
         System.out.println(persona1.MostrarPuntos());
+    }
+
+    @Test
+    public void TestEdad() {
+        Cliente cliente1 = new Cliente("Juan", 123, "01/04/2004");
+        System.out.println();
+        assertEquals(17, cliente1.getEdadPersona());
     }
 }

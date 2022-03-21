@@ -42,7 +42,7 @@ public class Boleteria {
             sala.listaAsientos.get(asiento).estado = false;
         }
         else {
-            System.out.println("El asiento no esta disponible ");;
+            System.out.println("El asiento no esta disponible ");
         }
     }
 
