@@ -6,13 +6,14 @@ public class Pelicula {
     public String duracion;
     public Horario horario;
     public int  restriccion;
-
-    public Pelicula(Genero genero, String nombrePelicula, String duracion, Horario horario, int  restriccion){
+    public Calidad calidad;
+    public Pelicula(Genero genero, String nombrePelicula, String duracion, Horario horario, int  restriccion , Calidad  calidad){
         this.genero = genero;
         this.nombrePelicula = nombrePelicula;
         this.duracion = duracion;
         this.horario = horario;
         this.restriccion = restriccion;
+        this.calidad = calidad;
     }
 
     public Genero getGenero() {
@@ -53,6 +54,10 @@ public class Pelicula {
 
     public void setRestriccion(int  restriccion) {
         this.restriccion = restriccion;
+    }
+
+    public Calidad getCalidad() {
+        return calidad;
     }
 }
 

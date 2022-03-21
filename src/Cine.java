@@ -7,7 +7,6 @@ public class Cine {
     ArrayList<Sala> salas;
     ArrayList<Pelicula> cartelera;
     ArrayList<Empleado> empleados;
-    ArrayList<Cliente>listaclientes;
 
     public Cine(String nombre, int nit, String direccion){
         this.nombre = nombre;
@@ -49,7 +48,6 @@ public class Cine {
     public void AddEmpleado(Empleado empleado){
         empleados.add(empleado);
     }
-    public void RegistrarCliente(Cliente cliente){listaclientes.add(cliente);}
 
 //Métodos para obtener el tamaño de los ArrayList    
     public int getSalaSize(){
@@ -64,5 +62,10 @@ public class Cine {
         return empleados.size();
     }
 
+    /* @Override
+       public String toString() {
+           return nombre +" "+
+                   "nit:" + nit ;
+       } */
 
 }
