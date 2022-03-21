@@ -63,6 +63,7 @@ public class TestCine {
 
     @Test
     public void TestAñadirPeliculas() {
+
         TestAñadirSalas();
         cine.AddPelicula(pelicula1);
         cine.AddPelicula(pelicula2);
@@ -108,4 +109,34 @@ public class TestCine {
 
         System.out.println(persona1.MostrarPuntos());
     }
+
+    @Test
+
+    public void precioDescuento()
+    {
+        int precio =boleteria.precioTotal("MIERCOLES" , TipoDePago.EFECTIVO, "SIN BANCO" , 1 , Genero.ANIMACION , ClasificarEdad.ADOLECENTE);
+        int precio2 =boleteria.precioTotal("LUNES" , TipoDePago.EFECTIVO, "SIN BANCO" , 1 , Genero.ANIMACION , ClasificarEdad.INFANTE);
+        int precio3 =boleteria.precioTotal("JUEVES" , TipoDePago.TARJETA_DE_CREDITO, "Los Elefantes" , 1 , Genero.ANIMACION , ClasificarEdad.ADULTO);
+
+        System.out.println(precio);
+        System.out.println(precio2);
+        System.out.println(precio3);
+
+        assertEquals(20,precio);
+        assertEquals(51,precio2);
+        assertEquals(35,precio3);
+
+
+
+
+    }
+    @Test
+    public void mostarFactura()
+    {
+        String factura =boleteria.mostarFactura(cine , pelicula1);
+        System.out.println(factura);
+        assertEquals("CINE CENTER  nit:73238 Jurassic World" , factura);
+
+    }
+
 }
