@@ -1,6 +1,5 @@
 public class Pelicula {
 
-
     public Genero genero;
     public String nombrePelicula;
     public String duracion;
