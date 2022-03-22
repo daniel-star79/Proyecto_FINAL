@@ -250,10 +250,6 @@ Cine_Main {
         if (operacion != 0 && operacion >1){
             continue;
         }
-            switch (opcion)
-
-
-
 
 
     }
