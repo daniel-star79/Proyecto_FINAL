@@ -1,3 +1,5 @@
+import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Cine {
@@ -7,6 +9,7 @@ public class Cine {
     ArrayList<Sala> salas;
     ArrayList<Pelicula> cartelera;
     ArrayList<Empleado> empleados;
+    ArrayList<Cliente>clientesRegistrados;
 
     public Cine(String nombre, int nit, String direccion){
         this.nombre = nombre;
@@ -16,6 +19,7 @@ public class Cine {
         salas = new ArrayList<>();
         empleados = new ArrayList<>();
         cartelera = new ArrayList<>();
+        clientesRegistrados = new ArrayList<>();
     }
 
     public void setNombre(String nombre) {
@@ -62,10 +66,26 @@ public class Cine {
         return empleados.size();
     }
 
-    /* @Override
+    @Override
        public String toString() {
-           return nombre +" "+
-                   "nit:" + nit ;
-       } */
+           return nombre +" "+ "nit:" + nit ;
+       }
+
+
+     public String RegistrarCliente(Cliente cliente){
+        String registro = "";
+        if(cliente.correoElectronico != null){
+            for(Cliente c:clientesRegistrados){
+                    if(cliente.equals(c)){
+                        registro =  "Ya registrado";
+                    }else{
+                        registro =  "Registro Exitoso";
+                    }
+            }
+            clientesRegistrados.add(cliente);
+        }
+        return registro;
+     }
+
 
 }

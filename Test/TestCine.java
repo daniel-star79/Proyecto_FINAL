@@ -9,7 +9,6 @@ public class TestCine {
 
         Cine cine = new Cine("PREMIER", 16727, "AV FERROVIARIA");
 
-
         Sala sala1 = new Sala("A", 100);
         Sala sala2 = new Sala("B", 100);
         Sala sala3 = new Sala("C", 100);
@@ -28,24 +27,25 @@ public class TestCine {
 
         Boleteria boleteria = new Boleteria(25, 35);
 
-
         Cliente persona1 = new Cliente("JUAN", 836839, "12/09/1999");
         Cliente persona2 = new Cliente("JUANA", 342423, "12/09/1999");
-        Cliente persona3 = new Cliente("JULIAN", 343243, "12/09/1999");
+        Cliente persona3 = new Cliente("JULIAN", 343243, "12/03/1999");
         Cliente persona4 = new Cliente("JUACHO", 564656, "12/09/1999");
         Cliente persona5 = new Cliente("ANDRES", 634437, "12/09/1999");
         Cliente persona6 = new Cliente("DANIEL", 876544, "12/09/1999");
-        Cliente persona7 = new Cliente("LEONARDO", 876532, "12/09/1999", "Daniel92@gmail.com");
-        Cliente persona8 = new Cliente("GASTON", 567433, "12/09/1999", "Daniel92@gmail.com");
-        Cliente persona9 = new Cliente("CARLOS", 876543, "12/09/1999", "Daniel92@gmail.com");
-        Cliente persona10 = new Cliente("KATHERIN",998265, "12/09/1999", "Daniel92@gmail.com");
-        Cliente persona11 = new Cliente("ADRIANA",831832, "12/09/1999", "Daniel92@gmail.com");
-        Cliente persona12 = new Cliente("JUAN",234352, "12/09/1999", "Daniel92@gmail.com");
+        Cliente persona7 = new Cliente("LEONARDO", 876532, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona8 = new Cliente("GASTON", 567433, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona9 = new Cliente("CARLOS", 876543, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona10 = new Cliente("KATHERIN",998265, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona11 = new Cliente("ADRIANA",831832, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona12 = new Cliente("JUAN",234352, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
 
-
+        public añadirRegistrados(){
+            cine
+        }
     @Test
     public void TestAddSouvenirs () {
-        boleteria.addsouvenirs("gorra");
+        boleteria.addsouvenirs("gorra", 8);
     }
     @Test
     public void TestAñadirSalas(){
@@ -74,6 +74,8 @@ public class TestCine {
         cine.AddPelicula(pelicula7);
         assertEquals(7,cine.getPeliculasSize());
         assertEquals(7,cine.salas.size());
+
+
     }
 
 
@@ -82,12 +84,18 @@ public class TestCine {
         TestAñadirPeliculas();
         ArrayList<String> butaca = boleteria.MuestraButaca(cine.cartelera, cine.salas);
         System.out.println(butaca);
+        System.out.println(butaca.get(1));
     }
 
     @Test
     public void TestVenderAsiento () {
         Asientos asientos = new Asientos("A", 1);
         asientos.setEstado(false);
+    }
+
+    @Test
+    public void TestOcuparAsiento () {
+        boleteria.OcuparAsiento(sala1,"A", 2);
     }
 
     @Test
@@ -110,24 +118,23 @@ public class TestCine {
         System.out.println(persona1.MostrarPuntos());
     }
 
+    @Test
+    public void TestActualizardia(){
+        boleteria.ActualizarDia("jueves");
+    }
 
     @Test
-    public void precioDescuento()
-    {
-        int precio =boleteria.precioTotal("MIERCOLES" , TipoDePago.EFECTIVO, "SIN BANCO" , 1 , Genero.ANIMACION , ClasificarEdad.ADOLECENTE,Calidad.SEGUNDA_DIMENSION);
-        int precio2 =boleteria.precioTotal("LUNES" , TipoDePago.EFECTIVO, "SIN BANCO" , 1 , Genero.ANIMACION , ClasificarEdad.INFANTE,Calidad.TERCERA_DIMENSION);
-        int precio3 =boleteria.precioTotal("JUEVES" , TipoDePago.TARJETA_DE_CREDITO, "Los Elefantes" , 1 , Genero.ANIMACION , ClasificarEdad.ADULTO,Calidad.TERCERA_DIMENSION);
+    public void precioDescuento(){
+        TestAñadirPeliculas();
+        double precio1 =boleteria.precioTotal(pelicula1,7,persona4,TipoDePago.TARJETA_DE_CREDITO,"UNION");
+        double precio2 =boleteria.precioTotal(pelicula6,3,persona4,TipoDePago.TARJETA_DE_CREDITO,"Los Elefantes");
+        double precio3 =boleteria.precioTotal(pelicula7,9,persona4,TipoDePago.TARJETA_DE_CREDITO,"BCP");
 
-        System.out.println(precio);
+        System.out.println(precio1);
         System.out.println(precio2);
         System.out.println(precio3);
-
-        assertEquals(20,precio);
-        assertEquals(51,precio2);
-        assertEquals(35,precio3);
-
     }
-    
+
     @Test
     public void mostarFactura()
     {
@@ -140,15 +147,22 @@ public class TestCine {
     public void CalcularEdad(){
 
     }
-
-
+    @Test
+    public void TestActualizarAsientos(){
+        System.out.println(sala1.ActualizarAsientos());
+        boleteria.OcuparAsiento(sala1,"A", 2);
+        boleteria.OcuparAsiento(sala1,"A", 5);
+        boleteria.OcuparAsiento(sala1,"A", 7);
+        boleteria.OcuparAsiento(sala1,"A", 8);
+        System.out.println(sala1.ActualizarAsientos());
+    }
 
     @Test
     public void TestEdad() {
-        Cliente cliente1 = new Cliente("Juan", 123, "01/04/2004");
-        System.out.println();
-        assertEquals(17, cliente1.getEdadPersona());
-
+        assertEquals(22, persona1.getEdadPersona());
+        //assertEquals(22, persona2.getEdadPersona());
+        //assertEquals(23, persona3.getEdadPersona());
     }
+
 
 }

@@ -23,14 +23,14 @@ public class Sala {
             this.IDSala = IDSala;
         }
 
-        public String CrearAsientos(){
-
+        public String ActualizarAsientos(){
+        String color= "";
                 int filas  = capacidad / 10 , count = 0 ;
                 String letraFila  = "A", asientos= "";
                 for(int i = 1 ;i<11;i++){
                     listaAsientos.add(new Asientos(letraFila,i));
-                    asientos+= "["+listaAsientos.get(count).numeroAciento+" "+listaAsientos.get(count).letraFila+
-                            " "+listaAsientos.get(count).estado+"]";
+                    if (listaAsientos.get(count).estado == true)color = "\u001B[32m"; else color = "\u001B[31m";
+                    asientos+= color+"["+listaAsientos.get(count).numeroAciento+" "+listaAsientos.get(count).letraFila+"]";
                     count ++;
                     if(i==10) {
                         asientos+="\n";
@@ -47,9 +47,8 @@ public class Sala {
             return asientos;
         }
 
-
-
-
-
+    public ArrayList<Asientos> getListaAsientos() {
+        return listaAsientos;
     }
+}
 

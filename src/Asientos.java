@@ -2,10 +2,11 @@ public class Asientos {
     // write your code here
     String  letraFila ;
     int numeroAciento;
-    boolean estado = true ;
+    boolean estado ;
     public Asientos(String Fila , int numeroAciento){
         this.letraFila = Fila;
         this.numeroAciento  = numeroAciento;
+        estado = true;
     }
 
     public void setEstado(boolean estado) {

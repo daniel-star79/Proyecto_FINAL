@@ -1,141 +1,135 @@
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashMap;
+import    java.util.Map;
 
 public class Boleteria {
-    String tipoDePago;
-    String pelicula;
     Horario horario;
     String dia;
-    int cantidadBoletos;
-    Cliente cliente;
-    Sala sala;
-    ArrayList <String> Butaca;
-    ArrayList <String> souvenirs;
-    int puntos_por_compra ;
-    int precio_2D , precio3D;
-    ArrayList<Cliente>listaclientes;
-    //Horario horario;
-    String calidadPelicula;
-
+    ClasificarEdad edad;
+    ArrayList<String> Butaca;
+    Map <String, Integer> souvenirs;
+    int puntos_por_compra;
+    double precio2D, precio3D;
+    ArrayList<Cliente> listaclientes;
+    ArrayList<String> listasBancos;
     //ArrayList<Puntos> cangeaar;
+    double precioTotal = 0;
 
-
-    public Boleteria(int precio3D, int precio_2D){
-        // this.pelicula=pelicula;
-        //zthis.horario =horario;
+    public Boleteria(int precio3D, int precio_2D) {
         this.precio3D = precio3D;
-        this.precio_2D = precio_2D;
+        this.precio2D = precio_2D;
         Butaca = new ArrayList<>();
-        souvenirs = new ArrayList<>();
-        listaclientes = new ArrayList<>();
-        Sala sala;
-    }
-    public void ActualizarDia(String dia){
-        dia  = dia ;
+        listasBancos = new ArrayList<>();
+        souvenirs = new HashMap<>();
+
     }
 
+    public void ActualizarDia(String dia) {
+        dia = dia;
+    }
 
+    public void setListasBancos(ArrayList<String> listasBancos) {
+        this.listasBancos = listasBancos;
+    }
+
+    public ArrayList<String> getListasBancos() {
+        return listasBancos;
+    }
+    
+    public void  Control_de_Asientos( Sala sala){
+        if(sala.listaAsientos.size() == 12){
+
+        }
+    }
+// ARREGLAR Y OPTIMIZAR MUESTRA BUTACA
     public ArrayList<String> MuestraButaca(ArrayList<Pelicula> peliculas, ArrayList<Sala> listasalas) {
+        String color  = "\u001B[32m";
         for (int i = 0; i < listasalas.size(); i++) {
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.MAÑANA.toString()  +"\n");
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.TARDE.toString()   +"\n");
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.NOCHE.toString()   +"\n");
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.PRENOCHE.toString()+"\n");
-            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + Horario.MAÑANA.toString()  +"\n");
+            Butaca.add(peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + peliculas.get(i).calidad.MostrarAbreviatura() + " \n" +
+                    "" + color+Horario.MAÑANA.toString() + " " +  color + Horario.TARDE.toString() + " " +color+  Horario.NOCHE.toString() + " " +
+                    "" + color+ Horario.PRENOCHE.toString() + " " + color+  Horario.MAÑANA.toString() +"\n");
         }
         return Butaca;
     }
 
-    public void addsouvenirs(String souvenir){
-        souvenirs.add(souvenir);
+    public void addsouvenirs(String souvenir , int  cantidad) {
+        souvenirs.put(souvenir,cantidad);
     }
 
-    public void RegistarCliente(Cliente cliente){
+    public void RegistarCliente(Cliente cliente) {
         listaclientes.add(cliente);
     }
 
-    public void comprarAsiento(Sala sala, int asiento, int numeroAsientos){
-        if (sala.listaAsientos.get(asiento).estado){
-            sala.listaAsientos.get(asiento).estado = false;
-        }
-        else {
 
-            //System.out.println("El asiento no esta disponible ");;
+    public void OcuparAsiento(Sala sala, String Fila, int numeroAsientos) {
 
-            System.out.println("El asiento no esta disponible ");
+        for(Asientos a: sala.getListaAsientos()){
+            if (a.letraFila.equals(Fila)  && a.numeroAciento == numeroAsientos && a.getEstado() ){
+                a.estado = false;
+            }else{
+                System.out.print("El Asiento se halla ocupado");
+            }
         }
     }
-
-    public int precioBoleto(Calidad calidadPelicula) {
-        int precio = 0;
-        if (calidadPelicula.toString().equals("3D")) {
+    public double precioBoleto(Calidad calidadPelicula) {
+        double precio = 0;
+        if (calidadPelicula.MostrarAbreviatura().equals("3D")) {
             precio = precio3D;
         } else {
-            if (calidadPelicula.toString().equals("2D")) {
-                precio = precio_2D;
+            if (calidadPelicula.MostrarAbreviatura().equals("2D")) {
+                precio = precio2D;
             }
         }
         return precio;
     }
 
-/*
-    public void ventaSouveniers(String producto)
-    {
-        for(int i=0 ; i<souvenirs.size ; i++)
-      size()
+    //Pendiente
+    public double precioTotal(Pelicula pelicula, int cantidadBoletos, Cliente cliente, TipoDePago pago, String banco) {
+        double precioBoleto = precioBoleto(pelicula.calidad);
+        double precioTotal = 0;
+        if (cliente.getEdadPersona() <= 60 || (dia.equals("MIERCOLES"))) {
+            precioTotal = cantidadBoletos * precioBoleto / 2;
+        } else if (cliente.getEdadPersona() <= 10 && pelicula.genero.equals(Genero.ANIMACION)) {
+            precioTotal = cantidadBoletos * ((precioBoleto * 85) / 100);
+        } else if ((dia.equals("JUEVES")) && (pago.equals(TipoDePago.TARJETA_DE_CREDITO)) && banco.equals("Los Elefantes")) {
+            precioTotal = cantidadBoletos * ((precioBoleto * 88) / 100);
+        }
+        return precioTotal;
+    }
+    //hasta aqui
+
+    public String mostarFactura(Cine cine ,Pelicula pelicula) {
+        return cine.toString() + " " + pelicula.getNombrePelicula();
+    }
+
+    public void comprarBoletos(ClasificarEdad edad, int cantidadBoletos, Pelicula pelicula, TipoDePago pago, String banco){
+        if(dia.equals("Miercoles")) {
+            precio3D = (precio3D*0.5);
+            precio2D = (precio2D*0.5);
+        }
+        else if(edad == ClasificarEdad.ADULTO_MAYOR){
+            precio3D = (precio3D*0.5);
+            precio2D = (precio2D*0.5);
+        }
+        else if(edad == ClasificarEdad.INFANTE || pelicula.genero.equals(Genero.ANIMACION)){
+            precio3D = (precio3D*0.75);
+            precio2D = (precio2D*0.75);
         }
 
+        precioTotal = precioTotal + cantidadBoletos*precio3D + cantidadBoletos*precio2D;
 
-     }
-*/
-
-
-    public int precioTotal( String dia  ,TipoDePago tipoDePago , String banco , int cantidadBoletos ,ClasificarEdad clasificarEdad , Calidad calidad) {
-        int precioBoleto = precioBoleto(calidad);
-        int precio ;
-        if((clasificarEdad.name().equals("ADULTO_MAYOR"))|| (dia.equals("MIERCOLES")))
-        {
-            precio = precioBoleto/2;
-            return cantidadBoletos*precio;
+        if(dia.equals("Jueves") || pago.equals(TipoDePago.TARJETA_DE_CREDITO) || banco.equals("Los Elefantes")){
+            precioTotal = (precioTotal*0.88);
         }
-        else
-        {
-            if(clasificarEdad.name().equals("INFANTE"))
-            {
-                if(genero.name().equals("ANIMACION"))
-                {
-                    precio=(precioBoleto*85)/100;
-                    return precio*cantidadBoletos;
+
+    }
+
+    public void  canjearSouvenirs(Cliente cliente , String souvenir ) {
+        for (Map.Entry<String, Integer> s: souvenirs.entrySet()) {
+                if(s.getKey().equals(souvenir)  && s.getValue() <cliente.cantidadpuntos){
+                    cliente.ActuaizarPutos(s.getValue());
                 }
-            }
-            else
-            {
-                if ((dia.equals("JUEVES")) && (tipoDePago.name().equals("TARJETA_DE_CREDITO")))
-                {
-                    if(banco.equals("Los Elefantes"))
-                    {
-                        precio=precioBoleto*cantidadBoletos;
-                        return (precio*88)/100;
-                    }
-                }
-            }
-            return precioBoleto*cantidadBoletos;
         }
-
     }
-
-    public String mostarFactura(Cine cine ,Pelicula pelicula)
-    {
-        return cine.toString() + " " +pelicula.getNombrePelicula()  ;
-    }
-/*
-    public int getPeliculasSize(){
-        return cangeo.size();
-    }
-
-    public void AddCangeo(Puntos Puntos){
-        cangeo.add(Puntos);
-    }
-*/
-
+    
 }

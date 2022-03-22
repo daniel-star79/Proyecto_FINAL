@@ -3,12 +3,13 @@ import java.util.Calendar;
 
 import java.util.Calendar;
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements Berificador_de_Personas_que_ya_estan_Registradas {
     int cantidadpuntos;
     String correoElectronico;
-    public Cliente(String nombrePersona, int carnetIdentidad, String fechaNacimiento,String correoElectronico){
+    String nacionalidad;
+    public Cliente(String nombrePersona, int carnetIdentidad, String fechaNacimiento,String correoElectronico , String nacionalidad){
         super(nombrePersona,carnetIdentidad,fechaNacimiento);
-        this.correoElectronico = correoElectronico;
+        this.nacionalidad=nacionalidad;
     }
 
     public Cliente(String nombrePersona ,  int  carnetIdentidad , String fechaNacimiento){
@@ -41,6 +42,9 @@ public class Cliente extends Persona {
         return cantidadpuntos;
     }
 
+    public void ActuaizarPutos(int puntos_a_Descontar){
+            cantidadpuntos-=puntos_a_Descontar;
+    }
     public int getEdadPersona(){
         // d d / m m / y y y y
         // 0 1 2 3 4 5 6 7 8 9
@@ -52,13 +56,11 @@ public class Cliente extends Persona {
         int dia = Integer.parseInt(diaNacimineto);
         Calendar nacimineto = Calendar.getInstance();
         nacimineto.set(año, mes, dia);
-
-        System.out.println(año);
-        System.out.println(mes);
-        System.out.println(dia);
-
-
         Calendar actual = Calendar.getInstance();
+
+        System.out.println(nacimineto.get(Calendar.DAY_OF_YEAR));
+        System.out.println(" ");
+        System.out.println(actual.get(Calendar.DAY_OF_YEAR));
 
         int edad = actual.get(Calendar.YEAR) - nacimineto.get(Calendar.YEAR);
         if (nacimineto.get(Calendar.DAY_OF_YEAR) > actual.get(Calendar.DAY_OF_YEAR)){
@@ -66,4 +68,10 @@ public class Cliente extends Persona {
         }
         return edad;
     }
+
+    @Override
+    public void Verificar_y_Recorrer_Lista(){
+
+    };
+
 }
