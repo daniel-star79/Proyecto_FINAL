@@ -87,5 +87,4 @@ public class Cine {
         return registro;
      }
 
-
 }

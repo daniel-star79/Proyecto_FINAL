@@ -27,22 +27,24 @@ public class TestCine {
 
         Boleteria boleteria = new Boleteria(25, 35);
 
-        Cliente persona1 = new Cliente("JUAN", 836839, "12/09/1999");
-        Cliente persona2 = new Cliente("JUANA", 342423, "12/09/1999");
-        Cliente persona3 = new Cliente("JULIAN", 343243, "12/03/1999");
-        Cliente persona4 = new Cliente("JUACHO", 564656, "12/09/1999");
-        Cliente persona5 = new Cliente("ANDRES", 634437, "12/09/1999");
-        Cliente persona6 = new Cliente("DANIEL", 876544, "12/09/1999");
-        Cliente persona7 = new Cliente("LEONARDO", 876532, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
-        Cliente persona8 = new Cliente("GASTON", 567433, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
-        Cliente persona9 = new Cliente("CARLOS", 876543, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
-        Cliente persona10 = new Cliente("KATHERIN",998265, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
-        Cliente persona11 = new Cliente("ADRIANA",831832, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
-        Cliente persona12 = new Cliente("JUAN",234352, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
-
+        Cliente persona1 = new Cliente("JUAN", 836839, ClasificarEdad.ADOLECENTE);
+        Cliente persona2 = new Cliente("JUANA", 342423, ClasificarEdad.INFANTE);
+        Cliente persona3 = new Cliente("JULIAN", 343243, ClasificarEdad.ADULTO);
+        Cliente persona4 = new Cliente("JUACHO", 564656, ClasificarEdad.ADULTO);
+        Cliente persona5 = new Cliente("ANDRES", 634437, ClasificarEdad.ADULTO_MAYOR);
+        Cliente persona6 = new Cliente("DANIEL", 876544,ClasificarEdad.INFANTE);
+        Cliente persona7 = new Cliente("LEONARDO", 876532, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.ADOLECENTE);
+        Cliente persona8 = new Cliente("GASTON", 567433, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.ADULTO);
+        Cliente persona9 = new Cliente("CARLOS", 876543, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.ADULTO_MAYOR);
+        Cliente persona10 = new Cliente("KATHERIN",998265, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.ADULTO_MAYOR);
+        Cliente persona11 = new Cliente("ADRIANA",831832, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.ADULTO_MAYOR);
+        Cliente persona12 = new Cliente("JUAN",234352, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.INFANTE);
+/*
         public añadirRegistrados(){
             cine
-        }
+    }
+      */
+
     @Test
     public void TestAddSouvenirs () {
         boleteria.addsouvenirs("gorra", 8);
@@ -83,14 +85,13 @@ public class TestCine {
     public void Mostrarbutaca() {
         TestAñadirPeliculas();
         ArrayList<String> butaca = boleteria.MuestraButaca(cine.cartelera, cine.salas);
-        System.out.println(butaca);
-        System.out.println(butaca.get(1));
+
+        System.out.print(butaca.get(1));
     }
 
     @Test
-    public void TestVenderAsiento () {
-        Asientos asientos = new Asientos("A", 1);
-        asientos.setEstado(false);
+    public void TestOcuparcAsiento () {
+        boleteria.OcuparAsiento(sala1,"A", 2);
     }
 
     @Test
@@ -109,9 +110,7 @@ public class TestCine {
     @Test
     public void TestAsignarPuntos () {
 
-        int puntos = persona1.MostrarPuntos();
-
-        assertEquals(0, puntos);
+        double puntos = persona1.MostrarPuntos();
 
         persona1.addPuntos(7, 50, 50);
 
@@ -136,8 +135,7 @@ public class TestCine {
     }
 
     @Test
-    public void mostarFactura()
-    {
+    public void mostarFactura(){
         String factura =boleteria.mostarFactura(cine , pelicula1 );
         System.out.println(factura);
         assertEquals("CINE CENTER  nit:73238 Jurassic World" , factura);
@@ -163,6 +161,11 @@ public class TestCine {
         //assertEquals(22, persona2.getEdadPersona());
         //assertEquals(23, persona3.getEdadPersona());
     }
+    @Test
+    public void TestCangeoPuntos(){
+        Boleteria cangeo1 =
+    }
+
 
 
 }

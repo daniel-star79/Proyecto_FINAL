@@ -27,12 +27,7 @@ Cine_Main {
     static Pelicula pelicula5 = new Pelicula(Genero.SUSPENSO, "El padrino", "3:30 horas", Horario.TARDE, 16, Calidad.SEGUNDA_DIMENSION);
     static Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA, 16, Calidad.SEGUNDA_DIMENSION);
     static Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, 16, Calidad.SEGUNDA_DIMENSION);
-
-    static Cliente cliente1 = new Cliente("1", 123, "13/13/2000");
-    static Cliente cliente2 = new Cliente("2", 123, "13/13/2000");
-    static Cliente cliente3 = new Cliente("3", 123, "13/13/2000");
-    static Cliente cliente4 = new Cliente("4", 123, "13/13/2000");
-
+    static Cliente cliente ;
     public void AñadirSalas() {
         cine.AddSala(sala1);
         cine.AddSala(sala2);
@@ -65,13 +60,14 @@ Cine_Main {
 //Se arma la estructura del metodo main
 
     public void menuPrincipal() {
-        System.out.println("***BIENVENIDO A CINE POOI***");
-        System.out.println("Desea realizar su Registro");
-        System.out.println("Seleccione una opcion de servicio:");
-        System.out.println("1.   Realizar registro");
-        System.out.println("2.   Sin Registrarse");
-        System.out.println("3.   Salir");
-        System.out.println("Ingrese la opcion a seguir");
+        System.out.println("***BIENVENIDO A CINE POOI***"
+                            +"Desea realizar su Registro"
+                            +"Seleccione una opcion de servicio:"
+                            +"1.   Realizar registro"
+                            +"2.   Sin Registrarse"
+                            +"3.   Ir a Boleteria"
+                            +"4.   Salir"
+                            +"Ingrese la opcion a seguir");
         int opcion = scanner.nextInt();
 
         switch (opcion) {
@@ -86,6 +82,16 @@ Cine_Main {
                 String correoElectronico = scanner.next();
                 System.out.println("Ingrese su nacionalidad");
                 String nacionalidad = scanner.next();
+                ClasificarEdad edad_Clasificada= boleteria.ClasificarEdad(fechaNacimiento);
+                Cliente cliente_R = new Cliente(nombrePersona,carnetIdentidad,fechaNacimiento,correoElectronico,nacionalidad,edad_Clasificada);
+                if (boleteria.Verificacion_de_Registro(cliente_R)== 1) {
+                    cliente = cliente_R;
+                    boleteria.listaclientes.add(cliente);
+                    System.out.println("Registro Exitoso");
+                }else{
+                    System.out.println("El cliente ya se encuentra registrado");
+                }
+
                 break;
             case 2:
                 System.out.println("Ingrese su Nombre");
@@ -94,23 +100,25 @@ Cine_Main {
                 int carnet = scanner.nextInt();
                 System.out.println("Ingrese su fecha de nacimiento");
                 String fecha = scanner.next();
+                cliente = new Cliente(nombreCliente, carnet, boleteria.ClasificarEdad(fecha));
                 break;
             case 3:
+                menuBoleteria();
+                break;
+            case 4:
+                System.out.println("------CINE CENTER -----------");
                 break;
             default:
                 System.out.println("Ingrese uno de los servicios indicados en pantalla");
-
-
         }
 
     }
 
     public void menuBoleteria() {
-        System.out.println("****BOLETERIA***");
-        System.out.println("1. Ver Cartelera");
-        System.out.println("2. Comprar Boletos");
-        System.out.println("3. Canjear Puntos");
-
+        System.out.println("****BOLETERIA***"
+                            +"1. Ver Cartelera\n"
+                            +"2. Comprar Boletos\n"
+                            +"3. Canjear Puntos");
         System.out.println("\nIngrese la opcion a seguir: ");
         int opcion = scanner.nextInt();
 
@@ -129,31 +137,44 @@ Cine_Main {
                 System.out.println("\nIngrese el tipo de boleto a comprar: ");
                 int seleccion = scanner.nextInt();
 
+                ClasificarEdad edad;
+
                 switch (seleccion){
                     case 1:
-                        //edad = ClasificarEdad.INFANTE;
+                        edad = ClasificarEdad.INFANTE;
                         break;
                     case 2:
+                        edad = ClasificarEdad.ADULTO;
                         break;
                     case 3:
+                        edad = ClasificarEdad.ADULTO_MAYOR;
                         break;
                     default:
+                        System.out.println("");
                 }
-
-                //boleteria.comprarBoletos();
 
                 System.out.println("Ingrese la cantidad de boletos que comprara:");
                 int cantidad = scanner.nextInt();
                 System.out.println("\n");
 
-                System.out.println("COMPRA DE BOLETOS");
+                boleteria.comprarBoletos(ClasificarEdad.ADULTO_MAYOR, cantidad, pelicula7, TipoDePago. EFECTIVO, "");
 
                 boleteria.comprarBoletos(ClasificarEdad.INFANTE,4, pelicula1, TipoDePago.TARJETA_DE_CREDITO, "Los Elefantes");
                 System.out.println("GRACIAS POR SU COMPRA!!");
                 System.out.println("Vuelva prontos");
+
+                if(boleteria.Verificacion_de_Registro(cliente) == 1){
+                    cliente.addPuntos(cantidad, 10, 0.50);
+                }
+
                 break;
             case 3:
-                boleteria.canjearSouvenirs(cliente1, "Awa");
+                if(boleteria.Verificacion_de_Registro(cliente) == 1){
+                    boleteria.canjearSouvenirs(cliente, "Awa");
+                }
+                else{
+                    System.out.println("Debe registrarse para poder obtener el beneficio de puntos");
+                }
                 break;
             default:
                 System.out.println("Ingrese una opcion valida, en el rango de 1-3");
@@ -164,14 +185,16 @@ Cine_Main {
         AñadirPeliculas();
         ArrayList<String> butaca = boleteria.MuestraButaca(cine.cartelera, cine.salas);
 
-        System.out.println("Escoja una de las peliculas que se encuentra en nuestra cartelera");
-        System.out.println("1."+pelicula1.nombrePelicula);
-        System.out.println("2."+pelicula2.nombrePelicula);
-        System.out.println("3."+pelicula3.nombrePelicula);
-        System.out.println("4."+pelicula4.nombrePelicula);
-        System.out.println("5."+pelicula5.nombrePelicula);
-        System.out.println("6."+pelicula6.nombrePelicula);
-        System.out.println("7."+pelicula7.nombrePelicula);
+        System.out.println("Escoja una de las peliculas que se encuentra en nuestra cartelera \n"+
+                                "1."+pelicula1.nombrePelicula+"\n"+
+                                "2."+pelicula2.nombrePelicula+"\n"+
+                                "3."+pelicula3.nombrePelicula+"\n"+
+                                "4."+pelicula4.nombrePelicula+"\n"+
+                                "5."+pelicula5.nombrePelicula+"\n"+
+                                "6."+pelicula6.nombrePelicula+"\n"+
+                                "7."+pelicula7.nombrePelicula+"\n"+
+                                "8.Regresar"+"\n");
+
 
         int opcion = scanner.nextInt();
 
@@ -197,6 +220,9 @@ Cine_Main {
             case 7:
                 System.out.println(butaca.get(7));
                 break;
+            case 8:
+                menuBoleteria();
+                break;
             default:
                 System.out.println("Ingrese una opcion valida, en la lista de peliculas, gracias :) ");
 
@@ -205,9 +231,31 @@ Cine_Main {
 
 
         public static void main (String[]args){
-        Cine_Main cine_main = new Cine_Main();
-        cine_main.menuPeliculas();
 
+        boolean repeticion = false;
+        Scanner scan = new Scanner(System.in)
+        Cine_Main cine_main = new Cine_Main();
+
+        while (repeticion == false){
+            System.out.println("-----------" +
+                    "CINE"+"\n" +
+                    "1. menu principal"+"\n" +
+                    "2. salir"+"\n");
         }
+            int operacion = scan.nextInt();
+        if (operacion == 2){
+            System.out.println("salio del cine");
+            break;
+        }
+        if (operacion != 0 && operacion >1){
+            continue;
+        }
+            switch (opcion)
+
+
+
+
+
+    }
 
 }

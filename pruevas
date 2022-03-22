@@ -21,6 +21,21 @@
         }
 
 
+/*
+        Cliente persona1 = new Cliente("JUAN", 836839, "12/09/1999");
+        Cliente persona2 = new Cliente("JUANA", 342423, "12/09/1999");
+        Cliente persona3 = new Cliente("JULIAN", 343243, "12/03/1999");
+        Cliente persona4 = new Cliente("JUACHO", 564656, "12/09/1999");
+        Cliente persona5 = new Cliente("ANDRES", 634437, "12/09/1999");
+        Cliente persona6 = new Cliente("DANIEL", 876544, "12/09/1999");
+        Cliente persona7 = new Cliente("LEONARDO", 876532, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona8 = new Cliente("GASTON", 567433, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona9 = new Cliente("CARLOS", 876543, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona10 = new Cliente("KATHERIN",998265, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona11 = new Cliente("ADRIANA",831832, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+        Cliente persona12 = new Cliente("JUAN",234352, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA");
+*/
+
 
 
 

@@ -29,8 +29,7 @@ public class Sala {
                 String letraFila  = "A", asientos= "";
                 for(int i = 1 ;i<11;i++){
                     listaAsientos.add(new Asientos(letraFila,i));
-                    if (listaAsientos.get(count).estado == true)color = "\u001B[32m"; else color = "\u001B[31m";
-                    asientos+= color+"["+listaAsientos.get(count).numeroAciento+" "+listaAsientos.get(count).letraFila+"]";
+                    asientos+= "["+listaAsientos.get(count).numeroAciento+" "+listaAsientos.get(count).letraFila+listaAsientos.get(count).estado+"]";
                     count ++;
                     if(i==10) {
                         asientos+="\n";
