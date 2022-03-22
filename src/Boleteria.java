@@ -1,13 +1,25 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
 public class Boleteria {
+    String tipoDePago;
+    String pelicula;
+    Horario horario;
+    String dia;
+    int cantidadBoletos;
+    Cliente cliente;
+    Sala sala;
     ArrayList <String> Butaca;
     ArrayList <String> souvenirs;
     int puntos_por_compra ;
     int precio_2D , precio3D;
     ArrayList<Cliente>listaclientes;
-    Horario horario;
+    //Horario horario;
     String calidadPelicula;
+
+    //ArrayList<Puntos> cangeaar;
+
+
     public Boleteria(int precio3D, int precio_2D){
         // this.pelicula=pelicula;
         //zthis.horario =horario;
@@ -47,7 +59,10 @@ public class Boleteria {
             sala.listaAsientos.get(asiento).estado = false;
         }
         else {
+
             //System.out.println("El asiento no esta disponible ");;
+
+            System.out.println("El asiento no esta disponible ");
         }
     }
 
@@ -63,122 +78,20 @@ public class Boleteria {
         return precio;
     }
 
-
-    public int precioBoleto()
+/*
+    public void ventaSouveniers(String producto)
     {
-
-        if (getCalidadPelicula().equals("3D"))
-        {
-            return precio3D;
-        }
-        else
-        { if(getCalidadPelicula().equals("2D"))
-        {
-            return precio2D  ;
-        }
-            return 0;
-        }
-    }
-
-    public int precioTotal( String dia  ,TipoDePago tipoDePago , String banco , int cantidadBoletos ,  Genero genero ,ClasificarEdad clasificarEdad)
-    {
-        int precioBoleto = precioBoleto();
-        int precio ;
-        if((clasificarEdad.name().equals("ADULTO_MAYOR"))|| (dia.equals("MIERCOLES")))
-        {
-            precio = precioBoleto/2;
-            return cantidadBoletos*precio;
-        }
-        else
-        {
-            if(clasificarEdad.name().equals("INFANTE"))
-            {
-                if(genero.name().equals("ANIMACION"))
-                {
-                    precio=(precioBoleto*85)/100;
-                    return precio*cantidadBoletos;
-                }
-            }
-            else
-            {
-                if ((dia.equals("JUEVES")) && (tipoDePago.name().equals("TARJETA_DE_CREDITO")))
-                {
-                    if(banco.equals("Los Elefantes"))
-                    {
-                        precio=precioBoleto*cantidadBoletos;
-                        return (precio*88)/100;
-                    }
-
-                }
-
-            }
-            return precioBoleto*cantidadBoletos;
+        for(int i=0 ; i<souvenirs.size ; i++)
+      size()
         }
 
-    }
 
-    public String mostarFactura(Cine cine ,Pelicula pelicula)
-    {
-        return cine.toString() + " " +pelicula.getNombrePelicula()  ;
-    }
-
-    /*
-    public int precioTotal( String dia  ,TipoDePago tipoDePago , String banco , int cantidadBoletos ,  Genero genero ,ClasificarEdad clasificarEdad , Calidad calidadPelicula) {
-        int precioBoleto = precioBoleto(calidadPelicula);
-        int precio ;
-        if((clasificarEdad.name().equals("ADULTO_MAYOR"))|| (dia.equals("MIERCOLES"))) {
-            precio = precioBoleto/2;
-            return cantidadBoletos*precio;
-        }
-        else
-        {
-            if(clasificarEdad.name().equals("INFANTE"))
-            {
-                if(genero.name().equals("ANIMACION"))
-                {
-                    precio=(precioBoleto*85)/100;
-                    return precio*cantidadBoletos;
-                }
-            }
-            else {
-                if ((dia.equals("JUEVES")) && (tipoDePago.name().equals("TARJETA_DE_CREDITO"))) {
-                    if (banco.equals("Los Elefantes")) {
-                        precio = precioBoleto * cantidadBoletos;
-                        return (precio * 88) / 100;
-                    }
-
-                }
-
-            }
-        }
-        return precioBoleto*cantidadBoletos;
-
-    }
-
-    public String mostarFactura(Cine cine ,Pelicula pelicula)
-    {
-        return cine.toString() + " " +pelicula.getNombrePelicula()  ;
-    }
-
+     }
 */
 
-    public int precioBoleto() {
-        if (calidadPelicula.equals("3D"))
-        {
-            return precio3D;
-        }
-        else
-        { if(calidadPelicula.equals("2D"))
-        {
-            return precio_2D  ;
-        }
-            return 0;
-        }
-    }
 
-
-    public int precioTotal( String dia  ,TipoDePago tipoDePago , String banco , int cantidadBoletos ,  Genero genero ,ClasificarEdad clasificarEdad) {
-        int precioBoleto = precioBoleto();
+    public int precioTotal( String dia  ,TipoDePago tipoDePago , String banco , int cantidadBoletos ,ClasificarEdad clasificarEdad , Calidad calidad) {
+        int precioBoleto = precioBoleto(calidad);
         int precio ;
         if((clasificarEdad.name().equals("ADULTO_MAYOR"))|| (dia.equals("MIERCOLES")))
         {
@@ -211,6 +124,10 @@ public class Boleteria {
 
     }
 
+    public String mostarFactura(Cine cine ,Pelicula pelicula)
+    {
+        return cine.toString() + " " +pelicula.getNombrePelicula()  ;
+    }
 /*
     public int getPeliculasSize(){
         return cangeo.size();
@@ -220,6 +137,5 @@ public class Boleteria {
         cangeo.add(Puntos);
     }
 */
-
 
 }

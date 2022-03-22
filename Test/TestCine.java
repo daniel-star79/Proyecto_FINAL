@@ -1,9 +1,9 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import static org.testng.AssertJUnit.assertEquals;
-
+import static org.junit.Assert.assertEquals;
 
 public class TestCine {
 
@@ -18,13 +18,13 @@ public class TestCine {
         Sala sala6 = new Sala("F", 50);
         Sala sala7 = new Sala("G", 50);
 
-        Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA, 16);
-        Pelicula pelicula2 = new Pelicula(Genero.CIENCIAFICCION, "Batman", "3 horas", Horario.TARDE, 16);
-        Pelicula pelicula3 = new Pelicula(Genero.FANTACIA, "El mago de Oz", "2:30 horas", Horario.PRENOCHE, 16);
-        Pelicula pelicula4 = new Pelicula(Genero.DRAMA, "Casablanca", "1 horas", Horario.NOCHE, 16);
-        Pelicula pelicula5 = new Pelicula(Genero.SUSPENSO, "El padrino", "3:30 horas", Horario.TARDE, 16);
-        Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA, 16);
-        Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, 16);
+        Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA, 16,   Calidad.SEGUNDA_DIMENSION);
+        Pelicula pelicula2 = new Pelicula(Genero.CIENCIAFICCION, "Batman", "3 horas", Horario.TARDE, 16 ,   Calidad.SEGUNDA_DIMENSION );
+        Pelicula pelicula3 = new Pelicula(Genero.FANTACIA, "El mago de Oz", "2:30 horas", Horario.PRENOCHE, 16,Calidad.SEGUNDA_DIMENSION);
+        Pelicula pelicula4 = new Pelicula(Genero.DRAMA, "Casablanca", "1 horas", Horario.NOCHE, 16,         Calidad.SEGUNDA_DIMENSION);
+        Pelicula pelicula5 = new Pelicula(Genero.SUSPENSO, "El padrino", "3:30 horas", Horario.TARDE, 16,   Calidad.SEGUNDA_DIMENSION);
+        Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA, 16,   Calidad.SEGUNDA_DIMENSION);
+        Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, 16,    Calidad.SEGUNDA_DIMENSION);
 
         Boleteria boleteria = new Boleteria(25, 35);
 
@@ -109,17 +109,14 @@ public class TestCine {
 
         System.out.println(persona1.MostrarPuntos());
     }
-    /*
 
+
+    @Test
     public void precioDescuento()
     {
-        Boleteria boleteria = new Boleteria(60, 40 );
-        boleteria.setCalidadPelicula("2D");
-        int precio =boleteria.precioTotal("MIERCOLES" , TipoDePago.EFECTIVO, "SIN BANCO" , 1 , Genero.ANIMACION , ClasificarEdad.ADOLECENTE);
-        boleteria.setCalidadPelicula("3D");
-        int precio2 =boleteria.precioTotal("LUNES" , TipoDePago.EFECTIVO, "SIN BANCO" , 1 , Genero.ANIMACION , ClasificarEdad.INFANTE);
-        boleteria.setCalidadPelicula("2D");
-        int precio3 =boleteria.precioTotal("JUEVES" , TipoDePago.TARJETA_DE_CREDITO, "Los Elefantes" , 1 , Genero.ANIMACION , ClasificarEdad.ADULTO);
+        int precio =boleteria.precioTotal("MIERCOLES" , TipoDePago.EFECTIVO, "SIN BANCO" , 1 , Genero.ANIMACION , ClasificarEdad.ADOLECENTE,Calidad.SEGUNDA_DIMENSION);
+        int precio2 =boleteria.precioTotal("LUNES" , TipoDePago.EFECTIVO, "SIN BANCO" , 1 , Genero.ANIMACION , ClasificarEdad.INFANTE,Calidad.TERCERA_DIMENSION);
+        int precio3 =boleteria.precioTotal("JUEVES" , TipoDePago.TARJETA_DE_CREDITO, "Los Elefantes" , 1 , Genero.ANIMACION , ClasificarEdad.ADULTO,Calidad.TERCERA_DIMENSION);
 
         System.out.println(precio);
         System.out.println(precio2);
@@ -129,17 +126,11 @@ public class TestCine {
         assertEquals(51,precio2);
         assertEquals(35,precio3);
 
-
-
-
     }
+    
     @Test
     public void mostarFactura()
     {
-        Cine cine = new Cine("CINE CENTER ", 73238,"AV.AMERICA" );
-        Boleteria boleteria = new Boleteria(60  , 40);
-        Pelicula pelicula1 = new Pelicula(Genero.ACCION, "Jurassic World", "2 horas", Horario.MAÑANA, Restriccion.edad1);
-        Persona cliente1 = new Cliente("VICTORIA " , "5862" , "05/10/1985" , "" );
         String factura =boleteria.mostarFactura(cine , pelicula1 );
         System.out.println(factura);
         assertEquals("CINE CENTER  nit:73238 Jurassic World" , factura);
@@ -148,6 +139,16 @@ public class TestCine {
     @Test
     public void CalcularEdad(){
 
-    }*/
+    }
+
+
+
+    @Test
+    public void TestEdad() {
+        Cliente cliente1 = new Cliente("Juan", 123, "01/04/2004");
+        System.out.println();
+        assertEquals(17, cliente1.getEdadPersona());
+
+    }
 
 }

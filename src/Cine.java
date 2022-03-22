@@ -62,5 +62,10 @@ public class Cine {
         return empleados.size();
     }
 
+    /* @Override
+       public String toString() {
+           return nombre +" "+
+                   "nit:" + nit ;
+       } */
 
 }
