@@ -8,19 +8,23 @@ public class Boleteria {
     ClasificarEdad edad;
     ArrayList<String> Butaca;
     Map<String, Integer> souvenirs;
+    Map<String, Integer> descuentos;
+    Map<String,TipoDePago>bancos;
     int puntos_por_compra;
     double precio2D, precio3D;
     ArrayList<Cliente> listaclientes;
-    ArrayList<String> listasBancos;
+
     //ArrayList<Puntos> cangeaar;
+    ArrayList<Banco> listaBancos;
     double precioTotal;
 
     public Boleteria(int precio3D, int precio_2D) {
         this.precio3D = precio3D;
         this.precio2D = precio_2D;
         Butaca = new ArrayList<>();
-        listasBancos = new ArrayList<>();
         souvenirs = new HashMap<>();
+        descuentos = new HashMap<>();
+        bancos = new HashMap<>();
 
     }
 
@@ -28,13 +32,6 @@ public class Boleteria {
         dia = dia;
     }
 
-    public void setListasBancos(ArrayList<String> listasBancos) {
-        this.listasBancos = listasBancos;
-    }
-
-    public ArrayList<String> getListasBancos() {
-        return listasBancos;
-    }
 
     public void Control_de_Asientos(Sala sala) {
         if (sala.listaAsientos.size() == 12) {
@@ -52,7 +49,7 @@ public class Boleteria {
         }
         return Butaca;
     }
-    public String MuestraButaca(Pelicula peliculas, Sala sala) {
+    public String MuestraButaca (Pelicula peliculas , Sala sala) {
         String color = "\u001B[32m";
         return  "\u001B[37m" + peliculas.nombrePelicula + " " + sala.IDSala + " " + peliculas.calidad.MostrarAbreviatura() + " \n" +
                     "" + color + Horario.MAÑANA.toString() + "\n" + color + Horario.TARDE.toString() + "\n" + color + Horario.NOCHE.toString() + "\n" +
@@ -92,53 +89,52 @@ public class Boleteria {
         return precio;
     }
 
-    //Pendiente
-    public double precioTotal(Pelicula pelicula, int cantidadBoletos, Cliente cliente, TipoDePago pago, String banco) {
-        double precioBoleto = precioBoleto(pelicula.calidad);
-        double precioTotal = 0;
-        if (cliente.getEdadPersona() <= 60 || (dia.equals("MIERCOLES"))) {
-            precioTotal = cantidadBoletos * precioBoleto / 2;
-        } else if (cliente.getEdadPersona() <= 10 && pelicula.genero.equals(Genero.ANIMACION)) {
-            precioTotal = cantidadBoletos * ((precioBoleto * 85) / 100);
-        } else if ((dia.equals("JUEVES")) && (pago.equals(TipoDePago.TARJETA_DE_CREDITO)) && banco.equals("Los Elefantes")) {
-            precioTotal = cantidadBoletos * ((precioBoleto * 88) / 100);
-        }
-        return precioTotal;
-    }
     //hasta aqui
 
     public String mostarFactura(Cine cine, Pelicula pelicula) {
         return cine.toString() + " " + pelicula.getNombrePelicula();
     }
 
-    public void comprarBoletos(ClasificarEdad edad, int cantidadBoletos, Pelicula pelicula, TipoDePago pago, String banco) {
+    public void comprarBoletos(ClasificarEdad edad, int cantidadBoletos,Pelicula pelicula,TipoDePago pago, String banco) {
+        double precioBoleto = precioBoleto(pelicula.calidad);
         if (dia.equals("Miercoles")) {
-            precio3D = (precio3D * 0.5);
-            precio2D = (precio2D * 0.5);
+            precioTotal = precioBoleto*descuentos.get("Miercoles");
         } else if (edad == ClasificarEdad.ADULTO_MAYOR) {
-            precio3D = (precio3D * 0.5);
-            precio2D = (precio2D * 0.5);
+            precioTotal = precioBoleto*descuentos.get("ADULTO_MAYOR");
         } else if (edad == ClasificarEdad.INFANTE || pelicula.genero.equals(Genero.ANIMACION)) {
-            precio3D = (precio3D * 0.75);
-            precio2D = (precio2D * 0.75);
+            precioTotal = precioBoleto*descuentos.get("INFANTE");
         }
 
         precioTotal = precioTotal + cantidadBoletos * precio3D + cantidadBoletos * precio2D;
 
         if (dia.equals("Jueves") || pago.equals(TipoDePago.TARJETA_DE_CREDITO) || banco.equals("Los Elefantes")) {
-            precioTotal = (precioTotal * 0.88);
+            precioTotal = precioBoleto*descuentos.get("BANCO");
         }
 
     }
+
+    public boolean verificacion_de_Trabajo_Banco(String banco){
+        boolean retornoVerificado = false;
+        for(Banco bancoConvenio:listaBancos){
+            if(bancoConvenio.nombreDelBanco.equals(banco)){
+                retornoVerificado =  true;
+            }else {
+                retornoVerificado = false;
+            }
+        }
+        return  retornoVerificado;
+
+    }
+
 
     public ClasificarEdad ClasificarEdad(String edad){
         //          00/00/0000
         int edad_entero = Integer.parseInt(edad.substring(6));
         edad_entero = 2022-edad_entero;
         ClasificarEdad edad_Clasificada = null;
-        if(edad_entero<=12){
+        if(edad_entero<=10){
             edad_Clasificada  = ClasificarEdad.INFANTE;
-        }else if (edad_entero<=23 && edad_entero>12){
+        }else if (edad_entero<=23 && edad_entero>10){
             edad_Clasificada  = ClasificarEdad.ADOLECENTE;
         }else if (edad_entero<=49 && edad_entero>23){
             edad_Clasificada  = ClasificarEdad.ADULTO;
@@ -173,6 +169,12 @@ public class Boleteria {
         this.edad = edad;
     }
 
+    public void AñadirDescuento(String nombreDescuento , int porcentage){
+        descuentos.put(nombreDescuento,porcentage/100);
+    }
+    public void AñadirBancos(String nombreDelBanco, TipoDePago tipoDePago){
+        bancos.put(nombreDelBanco,tipoDePago);
+    }
 
 
 }

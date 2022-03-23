@@ -39,7 +39,26 @@ public class TestCine {
         Cliente persona10 = new Cliente("KATHERIN",998265, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.ADULTO_MAYOR);
         Cliente persona11 = new Cliente("ADRIANA",831832, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.ADULTO_MAYOR);
         Cliente persona12 = new Cliente("JUAN",234352, "12/09/1999", "Daniel92@gmail.com", "BOLIVIANA", ClasificarEdad.INFANTE);
-/*
+
+
+        @Test
+        public void AñadirDescuentos(){
+            boleteria.AñadirDescuento("ADULTO_MAYOR",50);
+            boleteria.AñadirDescuento("Miercoles",50);
+            boleteria.AñadirDescuento("INFANTE",15);
+            boleteria.AñadirDescuento("BANCO",12);
+
+            assertEquals(4,boleteria.descuentos.size());
+    }
+
+       @Test
+       public void AñadirBancos(){
+            boleteria.AñadirBancos("Fie",TipoDePago.TARJETA_DE_DEBITO);
+            boleteria.AñadirBancos("Sol",TipoDePago.TARJETA_DE_CREDITO);
+
+            assertEquals(2,boleteria.bancos.size());
+       }
+        /*
         public añadirRegistrados(){
             cine
     }
@@ -123,18 +142,6 @@ public class TestCine {
     }
 
     @Test
-    public void precioDescuento(){
-        TestAñadirPeliculas();
-        double precio1 =boleteria.precioTotal(pelicula1,7,persona4,TipoDePago.TARJETA_DE_CREDITO,"UNION");
-        double precio2 =boleteria.precioTotal(pelicula6,3,persona4,TipoDePago.TARJETA_DE_CREDITO,"Los Elefantes");
-        double precio3 =boleteria.precioTotal(pelicula7,9,persona4,TipoDePago.TARJETA_DE_CREDITO,"BCP");
-
-        System.out.println(precio1);
-        System.out.println(precio2);
-        System.out.println(precio3);
-    }
-
-    @Test
     public void mostarFactura(){
         String factura =boleteria.mostarFactura(cine , pelicula1 );
         System.out.println(factura);
@@ -161,10 +168,14 @@ public class TestCine {
         //assertEquals(22, persona2.getEdadPersona());
         //assertEquals(23, persona3.getEdadPersona());
     }
+    /*
     @Test
     public void TestCangeoPuntos(){
         Boleteria cangeo1 =
     }
+
+    */
+
 
 
 

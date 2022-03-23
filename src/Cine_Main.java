@@ -1,7 +1,10 @@
+import jdk.swing.interop.SwingInterOpUtils;
 import org.junit.Test;
 import org.w3c.dom.ls.LSOutput;
 
+import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 import static org.junit.Assert.assertEquals;
@@ -54,34 +57,52 @@ Cine_Main {
 
     }
 
+    public void AñadirBancos(){
+        boleteria.AñadirBancos("Fie",TipoDePago.TARJETA_DE_CREDITO);
+        boleteria.AñadirBancos("Sol",TipoDePago.TARJETA_DE_DEBITO);
+    }
+
     static Boleteria boleteria = new Boleteria(60, 40);
 
 
 //Se arma la estructura del metodo main
 
     public void menuPrincipal() {
-        System.out.println("***BIENVENIDO A CINE POOI***"
-                            +"Desea realizar su Registro"
-                            +"Seleccione una opcion de servicio:"
-                            +"1.   Realizar registro"
-                            +"2.   Sin Registrarse"
-                            +"3.   Ir a Boleteria"
-                            +"4.   Salir"
+        System.out.println("********BIENVENIDOS********\n "
+                            +"Seleccione una opcion de servicio:\n"
+                            +"1.  Usuario Registrado\n"
+                            +"2.  Registrase\n"
+                            +"3.  Sin Registarse\n"
+                            +"4.  Salir \n "
                             +"Ingrese la opcion a seguir");
         int opcion = scanner.nextInt();
 
         switch (opcion) {
             case 1:
+                System.out.println("Ingrese su numero de carnet");
+                int numeroCarnet = scanner.nextInt();
+                Cliente cliente = new Cliente(numeroCarnet);
+                if (boleteria.Verificacion_de_Registro(cliente)==0)
+                {
+                    System.out.println("Usuario Registrado");
+
+
+                }else{
+                    System.out.println("Usuario no registrado");
+                }
+
+            case 2:
                 System.out.println("Ingrese su  Nombre");
                 String nombrePersona = scanner.next();
                 System.out.println("Ingrese su numero de carnet de Identidad");
                 int carnetIdentidad = scanner.nextInt();
-                System.out.println("Ingrese su fecha de Nacimiento de la siguiente forma 00/00/00");
+                System.out.println("Ingrese su fecha de Nacimiento de la siguiente forma dd/MM/yyyy");
                 String fechaNacimiento = scanner.next();
                 System.out.println("Ingrese su correo electronico");
                 String correoElectronico = scanner.next();
                 System.out.println("Ingrese su nacionalidad");
                 String nacionalidad = scanner.next();
+
                 ClasificarEdad edad_Clasificada= boleteria.ClasificarEdad(fechaNacimiento);
                 Cliente cliente_R = new Cliente(nombrePersona,carnetIdentidad,fechaNacimiento,correoElectronico,nacionalidad,edad_Clasificada);
                 if (boleteria.Verificacion_de_Registro(cliente_R)== 1) {
@@ -92,29 +113,33 @@ Cine_Main {
                     System.out.println("El cliente ya se encuentra registrado");
                 }
 
-                break;
-            case 2:
-                System.out.println("Ingrese su Nombre");
-                String nombreCliente = scanner.next();
-                System.out.println("Ingresa tu numero de carnet");
-                int carnet = scanner.nextInt();
-                System.out.println("Ingrese su fecha de nacimiento");
-                String fecha = scanner.next();
-                cliente = new Cliente(nombreCliente, carnet, boleteria.ClasificarEdad(fecha));
-                break;
+
             case 3:
-                menuBoleteria();
+                System.out.println("Ingrese su nombre");
+                String nombre=scanner.next();
+                System.out.println("Ingrese su fecha de nacimiento ");
+                String fecha =scanner.next();
+                System.out.println("Ingrese su carnet de Identidad");
+                int carnetI= scanner.nextInt();
+                ClasificarEdad edad = boleteria.ClasificarEdad(fecha);
+                Cliente cliente1= new Cliente(nombre , carnetI , edad);
                 break;
             case 4:
-                System.out.println("------CINE CENTER -----------");
                 break;
             default:
                 System.out.println("Ingrese uno de los servicios indicados en pantalla");
         }
 
     }
-
+/*
     public void menuBoleteria() {
+        System.out.println("***BOLETERIA DEL CINE POOI***");
+
+        System.out.println("Que pelicula desea ver?");
+        menuPeliculas();
+
+        System.out.println("Escoja un horario: ");
+
         System.out.println("****BOLETERIA***"
                             +"1. Ver Cartelera\n"
                             +"2. Comprar Boletos\n"
@@ -129,10 +154,10 @@ Cine_Main {
             case 2:
                 System.out.println("\nCOMPRA DE BOLETOS");
 
-                System.out.println("\nBoletos para: ");
-                System.out.println("1. Niños (hasta los  10 años)");
-                System.out.println("2. Adultos");
-                System.out.println("3. Adultos Mayores");
+                System.out.println("\nComprar boletos para:\n "
+                +"1. Niños (hasta los  10 años\n)"
+                +"2. Adulto\ns"
+                +"3. Adultos Mayores");
 
                 System.out.println("\nIngrese el tipo de boleto a comprar: ");
                 int seleccion = scanner.nextInt();
@@ -171,6 +196,64 @@ Cine_Main {
             case 3:
                 if(boleteria.Verificacion_de_Registro(cliente) == 1){
                     boleteria.canjearSouvenirs(cliente, "Awa");
+                }
+                else{
+                    System.out.println("Debe registrarse para poder obtener el beneficio de puntos");
+                }
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida, en el rango de 1-3");
+        }
+    }
+*/
+
+    public void menuBoleteria() {
+        System.out.println("***BOLETERIA DEL CINE POOI***"+"\n");
+        System.out.println("****BOLETERIA***"+"\n"
+                +"1. Ver Cartelera\n"
+                +"2. Comprar Boletos\n"
+                +"3. Canjear Puntos");
+        System.out.println("\nIngrese la opcion a seguir: ");
+        int opcion = scanner.nextInt();
+
+        switch (opcion) {
+            case 1:
+                menuPeliculas();
+                break;
+            case 2:
+                System.out.println("Que pelicula desea ver");
+                String pelicula = scanner.next();
+                System.out.println("Ingrese la cantidad de boletos que comprara:");
+                int cantidad_de_boletos = scanner.nextInt();
+                Pelicula peliculaEscogida = cine.RetornarPelicula(pelicula);
+                System.out.println(boleteria.MuestraButaca(peliculaEscogida,sala1));
+                for(int i = 1;i<cantidad_de_boletos ;i++) {
+                    System.out.println(sala1.ActualizarAsientos());
+                    System.out.println("Que acientos desea");
+                    int columna = scanner.nextInt();
+                    System.out.print("");
+                    String fila = scanner.next().toUpperCase(Locale.ROOT);
+                    boleteria.OcuparAsiento(sala1, fila, columna);
+                }
+                System.out.println("Metodo de pago"+
+                                    "\nEFECTIVO , TARJETA_DE_CREDITO , TARJETA_DE_DEBITO , QR ,PUNTOS ");
+                String metodoPago = scanner.next().toUpperCase();
+                if(metodoPago != "EFECTIVO"){
+                    System.out.println("Ingrese su Banca Movil");
+                    boleteria.comprarBoletos(cliente.clasificarEdad,cantidad_de_boletos,peliculaEscogida, TipoDePago.TARJETA_DE_CREDITO, "Los Elefantes");
+                    System.out.println("GRACIAS POR SU COMPRA!!");
+                    System.out.println("Vuelva pronto");
+                }
+                System.out.println("Por favor introdusca su carnet de identidad para acumular puntos");
+                int carId = scanner.nextInt();
+                if(boleteria.Verificacion_de_Registro(cliente) == 0){
+                    cliente.addPuntos(cantidad_de_boletos, boleteria.puntos_por_compra, 50);
+                }
+                break;
+            case 3:
+                if(boleteria.Verificacion_de_Registro(cliente) == 1){
+                    boleteria.canjearSouvenirs(cliente, "Awa");
+                    System.out.println("Gracias por seguir con Nosotros");
                 }
                 else{
                     System.out.println("Debe registrarse para poder obtener el beneficio de puntos");
@@ -233,24 +316,34 @@ Cine_Main {
         public static void main (String[]args){
 
         boolean repeticion = false;
-        Scanner scan = new Scanner(System.in)
         Cine_Main cine_main = new Cine_Main();
 
-        while (repeticion == false){
-            System.out.println("-----------" +
-                    "CINE"+"\n" +
-                    "1. menu principal"+"\n" +
-                    "2. salir"+"\n");
-        }
-            int operacion = scan.nextInt();
-        if (operacion == 2){
-            System.out.println("salio del cine");
-            break;
-        }
-        if (operacion != 0 && operacion >1){
-            continue;
-        }
+        while (repeticion == false) {
+            System.out.println("-----------" +"\n"+
+                    "CINE" + "\n" +
+                    "1. menu principal" + "\n" +
+                    "2. salir" + "\n");
 
+            int opcion = scanner.nextInt();
+
+            if (opcion == 2) {
+                System.out.println("salio del cine");
+                break;
+            }
+            if (opcion != 0 && opcion > 1) {
+                continue;
+            }
+            switch(opcion){
+                case 1:
+                    cine_main.menuPrincipal();
+                    break;
+                default:
+                    System.out.println("error vuelva a intentarlo");
+                    break;
+
+            }
+
+        }
 
     }
 

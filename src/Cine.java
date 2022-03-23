@@ -87,4 +87,15 @@ public class Cine {
         return registro;
      }
 
+
+     public Pelicula RetornarPelicula(String peli_entrada){
+        Pelicula peli_salida = null;
+        for(Pelicula p:cartelera){
+            if(p.getNombrePelicula().equals(peli_entrada)){
+                peli_salida = p;
+            }
+        }
+        return peli_salida;
+     }
+
 }

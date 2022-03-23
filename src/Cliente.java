@@ -5,16 +5,22 @@ public class Cliente extends Persona {
     String correoElectronico;
     String nacionalidad;
     String fechaNacimiento;
-    public Cliente(String nombrePersona, int carnetIdentidad, String fechaNacimiento, String correoElectronico , String nacionalidad, ClasificarEdad edad){
-        super(nombrePersona, carnetIdentidad, edad);
+    public Cliente(String nombrePersona, int carnetIdentidad, String fechaNacimiento, String correoElectronico , String nacionalidad, ClasificarEdad clasificarEdad){
+        super(nombrePersona, carnetIdentidad, clasificarEdad);
         this.fechaNacimiento = fechaNacimiento;
         this.nacionalidad = nacionalidad;
+        this.correoElectronico = correoElectronico;
     }
 
     public Cliente(String nombrePersona,  int  carnetIdentidad, ClasificarEdad edad){
         super(nombrePersona, carnetIdentidad, edad);
-        this.correoElectronico = correoElectronico;
+
     }
+    public  Cliente (int carnetIdentidad)
+    {
+        super(carnetIdentidad);
+    }
+
 
     public void AñadirPersonaCorreo(String correoElectronico){
         this.correoElectronico = correoElectronico;
@@ -37,7 +43,7 @@ public class Cliente extends Persona {
         cantidadpuntos = ((entradas*puntos_x_compra*descuento)/100);
     }
 
-    public  MostrarPuntos(){
+    public  double MostrarPuntos(){
         return cantidadpuntos;
     }
 
