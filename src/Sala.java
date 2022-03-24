@@ -7,6 +7,7 @@ public class Sala {
         String IDSala = "SALA-" ;
         ArrayList<Asientos> listaAsientos;
         int capacidad ;
+        String asiento;
 
 
     public Sala(String IDSala, int capacidad){
@@ -29,7 +30,7 @@ public class Sala {
                 String letraFila  = "A", asientos= "";
                 for(int i = 1 ;i<11;i++){
                     listaAsientos.add(new Asientos(letraFila,i));
-                    asientos+= "["+listaAsientos.get(count).numeroAciento+" "+listaAsientos.get(count).letraFila+listaAsientos.get(count).estado+"]";
+                    asientos+= "["+listaAsientos.get(count).getNumeroAciento()+" "+listaAsientos.get(count).getLetraFila()+listaAsientos.get(count).estado+"]";
                     count ++;
                     if(i==10) {
                         asientos+="\n";
@@ -49,5 +50,6 @@ public class Sala {
     public ArrayList<Asientos> getListaAsientos() {
         return listaAsientos;
     }
+
 }
 

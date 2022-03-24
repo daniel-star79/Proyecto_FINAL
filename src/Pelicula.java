@@ -1,12 +1,12 @@
 public class Pelicula {
 
-    public Genero genero;
-    public String nombrePelicula;
-    public String duracion;
-    public Horario horario;
-    public int  restriccion;
-    public Calidad calidad;
-    public Pelicula(Genero genero, String nombrePelicula, String duracion, Horario horario, int  restriccion , Calidad  calidad){
+    private Genero genero;
+    private String nombrePelicula;
+    private String duracion;
+    private Horario horario;
+    private int  restriccion;
+    private Calidad calidad;
+    Pelicula(Genero genero, String nombrePelicula, String duracion, Horario horario, int restriccion, Calidad calidad){
         this.genero = genero;
         this.nombrePelicula = nombrePelicula;
         this.duracion = duracion;

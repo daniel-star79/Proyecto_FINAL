@@ -1,81 +1,148 @@
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Boleteria {
-    Horario horario;
-    String dia;
-    ClasificarEdad edad;
-    ArrayList<String> Butaca;
-    Map<String, Integer> souvenirs;
-    Map<String, Integer> descuentos;
-    Map<String,TipoDePago>bancos;
-    int puntos_por_compra;
-    double precio2D, precio3D;
-    ArrayList<Cliente> listaclientes;
+    private String dia  = "Miercoles";
+    private String nuevoDia;
+    private ClasificarEdad edad;
+    private ArrayList<String> Butaca;
+    private Map<String, Integer> souvenirs;
+    private Map<String, Integer> descuentos;
+    private Map<String,TipoDePago>bancos;
+    private int puntos_por_compra= 50 ;
+    private double precio2D, precio3D;
+    private ArrayList<Cliente> listaclientes;
+    private ArrayList<Banco> listaBancos;
+    private double precioTotal = 0 ;
 
-    //ArrayList<Puntos> cangeaar;
-    ArrayList<Banco> listaBancos;
-    double precioTotal;
-
-    public Boleteria(int precio3D, int precio_2D) {
+    public Boleteria(int precio3D, int precio2D) {
         this.precio3D = precio3D;
-        this.precio2D = precio_2D;
+        this.precio2D = precio2D;
         Butaca = new ArrayList<>();
         souvenirs = new HashMap<>();
         descuentos = new HashMap<>();
         bancos = new HashMap<>();
+        listaBancos = new ArrayList<>();
+        listaclientes = new ArrayList<>();
 
     }
 
-    public void ActualizarDia(String dia) {
-        dia = dia;
+    public void añadirCliente(Cliente cliente){
+        listaclientes.add(cliente);
+    }
+
+    public int getPuntosPorCompra() {
+        return puntos_por_compra;
+    }
+
+    public void actualizarDia(String dia) {
+        dia = nuevoDia;
+    }
+
+    public int sizeDescuentos() {
+        return descuentos.size();
+    }
+
+    public int sizeBancos() {
+        return bancos.size();
     }
 
 
-    public void Control_de_Asientos(Sala sala) {
+    public double getPrecio2D() {
+        return precio2D;
+    }
+
+    public double getPrecio3D() {
+        return precio3D;
+    }
+
+    public String getDia(){
+        return dia;
+    }
+
+    public void controlDeAsientos(Sala sala) {
         if (sala.listaAsientos.size() == 12) {
 
         }
     }
 
     // ARREGLAR Y OPTIMIZAR MUESTRA BUTACA
-    public ArrayList<String> MuestraButaca(ArrayList<Pelicula> peliculas, ArrayList<Sala> listasalas) {
+    public ArrayList<String> muestraButaca(ArrayList<Pelicula> peliculas, ArrayList<Sala> listasalas) {
         String color = "\u001B[32m";
         for (int i = 0; i < listasalas.size(); i++) {
-            Butaca.add("\u001B[37m" + peliculas.get(i).nombrePelicula + " " + listasalas.get(i).IDSala + " " + peliculas.get(i).calidad.MostrarAbreviatura() + " \n" +
+            Butaca.add("\u001B[37m" + peliculas.get(i).getNombrePelicula() + " " + listasalas.get(i).IDSala + " " + peliculas.get(i).getCalidad().MostrarAbreviatura() + " \n" +
                     "" + color + Horario.MAÑANA.toString() + "\n" + color + Horario.TARDE.toString() + "\n" + color + Horario.NOCHE.toString() + "\n" +
                     "" + color + Horario.PRENOCHE.toString() + "\n" + color + Horario.MAÑANA.toString() + "\n");
         }
         return Butaca;
     }
-    public String MuestraButaca (Pelicula peliculas , Sala sala) {
+
+    public String muestraButaca(Pelicula peliculas , Sala sala) {
         String color = "\u001B[32m";
-        return  "\u001B[37m" + peliculas.nombrePelicula + " " + sala.IDSala + " " + peliculas.calidad.MostrarAbreviatura() + " \n" +
+        return  "\u001B[37m" + peliculas.getNombrePelicula() + " " + sala.IDSala + " " + peliculas.getCalidad().MostrarAbreviatura() + " \n" +
                     "" + color + Horario.MAÑANA.toString() + "\n" + color + Horario.TARDE.toString() + "\n" + color + Horario.NOCHE.toString() + "\n" +
                     "" + color + Horario.PRENOCHE.toString() + "\n" + color + Horario.MAÑANA.toString() + "\n";
     }
 
 
-    public void addsouvenirs(String souvenir, int cantidad) {
+    public void addSouvenirs(String souvenir, int cantidad) {
         souvenirs.put(souvenir, cantidad);
     }
 
-    public void RegistarCliente(Cliente cliente) {
+    public void registarCliente(Cliente cliente) {
         listaclientes.add(cliente);
     }
 
 
-    public void OcuparAsiento(Sala sala, String Fila, int numeroAsientos) {
+    /*public void ocuparAsiento1(Sala sala, String codigoAsiento) {
+
+        char [] codigoDividido = codigoAsiento.toCharArray();
+        String columna = "";
+        for(int i = 0; i < codigoDividido.length; i++){
+            if(Character.isDigit(codigoDividido[i])){
+                columna+=codigoDividido[i];
+            }
+        }
+        String columnaNumero = columna.substring(0);
+
+        String fila = "";
+        for(int i = 0; i < codigoDividido.length; i++){
+            if(Character.isLetter(codigoDividido[i])){
+                fila+=codigoDividido[i];
+            }
+        }
 
         for (Asientos a : sala.getListaAsientos()) {
-            if (a.letraFila.equals(Fila) && a.numeroAciento == numeroAsientos && a.getEstado()) {
+            if (a.getLetraFila().equals(Fila) && a.getNumeroAciento()== numeroAsientos && a.getEstado()) {
                 a.estado = false;
             } else {
                 System.out.print("El Asiento se halla ocupado");
             }
         }
+    }*/
+
+    public void ocuparAsiento(Sala sala, String codigo ) {
+        int cantidadDigitos = codigo.length();
+        String fila  = "";
+        int columna  = 0;
+        if(cantidadDigitos == 2){
+            columna = Integer.parseInt(codigo.substring(0,1));
+            fila = codigo.substring(1);
+        }else{
+            columna = Integer.parseInt(codigo.substring(0,2));
+            fila = codigo.substring(2);
+        }
+        for (Asientos a : sala.getListaAsientos()) {
+            if (a.getLetraFila().equals(fila) && a.getNumeroAciento()== columna && a.getEstado()) {
+                a.estado = false;
+            } else {
+                System.out.println("El Asiento se encuentra ocupado");
+            }
+        }
     }
+
 
     public double precioBoleto(Calidad calidadPelicula) {
         double precio = 0;
@@ -89,45 +156,34 @@ public class Boleteria {
         return precio;
     }
 
-    //hasta aqui
-
     public String mostarFactura(Cine cine, Pelicula pelicula) {
         return cine.toString() + " " + pelicula.getNombrePelicula();
     }
 
-    public void comprarBoletos(ClasificarEdad edad, int cantidadBoletos,Pelicula pelicula,TipoDePago pago, String banco) {
-        double precioBoleto = precioBoleto(pelicula.calidad);
+    public void comprarBoletos(ClasificarEdad edad, int cantidadBoletos,Pelicula pelicula,String metodoDePago, String banco) {
+        double precioBoleto = precioBoleto(pelicula.getCalidad());
         if (dia.equals("Miercoles")) {
             precioTotal = precioBoleto*descuentos.get("Miercoles");
         } else if (edad == ClasificarEdad.ADULTO_MAYOR) {
             precioTotal = precioBoleto*descuentos.get("ADULTO_MAYOR");
-        } else if (edad == ClasificarEdad.INFANTE || pelicula.genero.equals(Genero.ANIMACION)) {
+        } else if (edad == ClasificarEdad.INFANTE || pelicula.getGenero().equals(Genero.ANIMACION)) {
             precioTotal = precioBoleto*descuentos.get("INFANTE");
         }
 
         precioTotal = precioTotal + cantidadBoletos * precio3D + cantidadBoletos * precio2D;
-
-        if (dia.equals("Jueves") || pago.equals(TipoDePago.TARJETA_DE_CREDITO) || banco.equals("Los Elefantes")) {
+        TipoDePago tipoDePagoPrueva = Enum.valueOf(TipoDePago.class ,metodoDePago);
+        if (dia.equals("Jueves") || tipoDePagoPrueva.equals(TipoDePago.TARJETA_DE_CREDITO) || banco.equals("Los Elefantes")) {
             precioTotal = precioBoleto*descuentos.get("BANCO");
         }
 
     }
 
-    public boolean verificacion_de_Trabajo_Banco(String banco){
-        boolean retornoVerificado = false;
-        for(Banco bancoConvenio:listaBancos){
-            if(bancoConvenio.nombreDelBanco.equals(banco)){
-                retornoVerificado =  true;
-            }else {
-                retornoVerificado = false;
-            }
-        }
-        return  retornoVerificado;
-
+    public boolean verificacionDeTrabajoBanco(String banco){
+        return listaBancos.contains(banco);
     }
 
 
-    public ClasificarEdad ClasificarEdad(String edad){
+    public ClasificarEdad clasificarEdad(String edad){
         //          00/00/0000
         int edad_entero = Integer.parseInt(edad.substring(6));
         edad_entero = 2022-edad_entero;
@@ -145,14 +201,30 @@ public class Boleteria {
     }
     public void canjearSouvenirs(Cliente cliente, String souvenir) {
         for (Map.Entry<String, Integer> s : souvenirs.entrySet()) {
-            if (s.getKey().equals(souvenir) && s.getValue() < cliente.cantidadpuntos) {
-                cliente.ActuaizarPutos(s.getValue());
+            if (s.getKey().equals(souvenir) && s.getValue() < cliente.getPuntos()) {
+                cliente.actuaizarPutos(s.getValue());
             }
         }
     }
 
 
-    public int  Verificacion_de_Registro(Cliente cliente){
+    public boolean verificacionDeRegistro(int carnet){
+        boolean verificacion = false ;
+            for (Cliente c:listaclientes){
+                if(carnet == c.getCarnetIdentidad()){
+                    verificacion =  true;
+                    break;
+                }
+            }
+            return verificacion;
+    }
+    public int sizeCliente(){
+        return listaclientes.size();
+    }
+/*
+
+
+   public int  Verificacion_de_Registro(Cliente cliente){
         int registro = 0;
         for(Cliente c: listaclientes){
             if(c.carnetIdentidad == cliente.carnetIdentidad){
@@ -164,17 +236,16 @@ public class Boleteria {
         }
         return  registro;
     }
-
+ */
     public void setClasificacionEdad(ClasificarEdad edad){
         this.edad = edad;
     }
 
-    public void AñadirDescuento(String nombreDescuento , int porcentage){
-        descuentos.put(nombreDescuento,porcentage/100);
+    public void añadirDescuento(String nombreDescuento , int porcentaje){
+        descuentos.put(nombreDescuento,porcentaje/100);
     }
-    public void AñadirBancos(String nombreDelBanco, TipoDePago tipoDePago){
+    public void añadirBancos(String nombreDelBanco, TipoDePago tipoDePago){
         bancos.put(nombreDelBanco,tipoDePago);
     }
-
 
 }

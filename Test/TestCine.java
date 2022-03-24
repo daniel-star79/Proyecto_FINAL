@@ -1,7 +1,6 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
 
@@ -43,40 +42,49 @@ public class TestCine {
 
         @Test
         public void AñadirDescuentos(){
-            boleteria.AñadirDescuento("ADULTO_MAYOR",50);
-            boleteria.AñadirDescuento("Miercoles",50);
-            boleteria.AñadirDescuento("INFANTE",15);
-            boleteria.AñadirDescuento("BANCO",12);
+            boleteria.añadirDescuento("ADULTO_MAYOR",50);
+            boleteria.añadirDescuento("Miercoles",50);
+            boleteria.añadirDescuento("INFANTE",15);
+            boleteria.añadirDescuento("BANCO",12);
 
-            assertEquals(4,boleteria.descuentos.size());
+            assertEquals(4,boleteria.sizeDescuentos());
     }
 
        @Test
-       public void AñadirBancos(){
-            boleteria.AñadirBancos("Fie",TipoDePago.TARJETA_DE_DEBITO);
-            boleteria.AñadirBancos("Sol",TipoDePago.TARJETA_DE_CREDITO);
+       public void añadirBancos(){
+            boleteria.añadirBancos("Fie",TipoDePago.TARJETA_DE_DEBITO);
+            boleteria.añadirBancos("Sol",TipoDePago.TARJETA_DE_CREDITO);
 
-            assertEquals(2,boleteria.bancos.size());
+            assertEquals(2,boleteria.sizeBancos());
        }
-        /*
-        public añadirRegistrados(){
-            cine
-    }
-      */
+    @Test
+    public void TestAñadirPersonas(){
+        boleteria.añadirCliente(persona1);
+        boleteria.añadirCliente(persona2);
+        boleteria.añadirCliente(persona3);
+        boleteria.añadirCliente(persona4);
+        boleteria.añadirCliente(persona5);
+        boleteria.añadirCliente(persona6);
+        boleteria.añadirCliente(persona7);
 
+        assertEquals(7,boleteria.sizeCliente());
+
+    }
     @Test
     public void TestAddSouvenirs () {
-        boleteria.addsouvenirs("gorra", 8);
+        boleteria.addSouvenirs("gorra", 8);
+        assertEquals(1,boleteria.sizeDescuentos());
+
     }
     @Test
     public void TestAñadirSalas(){
-        cine.AddSala(sala1);
-        cine.AddSala(sala2);
-        cine.AddSala(sala3);
-        cine.AddSala(sala4);
-        cine.AddSala(sala5);
-        cine.AddSala(sala6);
-        cine.AddSala(sala7);
+        cine.addSala(sala1);
+        cine.addSala(sala2);
+        cine.addSala(sala3);
+        cine.addSala(sala4);
+        cine.addSala(sala5);
+        cine.addSala(sala6);
+        cine.addSala(sala7);
 
         assertEquals(7,cine.salas.size());
 
@@ -86,66 +94,88 @@ public class TestCine {
     public void TestAñadirPeliculas() {
 
         TestAñadirSalas();
-        cine.AddPelicula(pelicula1);
-        cine.AddPelicula(pelicula2);
-        cine.AddPelicula(pelicula3);
-        cine.AddPelicula(pelicula4);
-        cine.AddPelicula(pelicula5);
-        cine.AddPelicula(pelicula6);
-        cine.AddPelicula(pelicula7);
+        cine.addPelicula(pelicula1);
+        cine.addPelicula(pelicula2);
+        cine.addPelicula(pelicula3);
+        cine.addPelicula(pelicula4);
+        cine.addPelicula(pelicula5);
+        cine.addPelicula(pelicula6);
+        cine.addPelicula(pelicula7);
+
         assertEquals(7,cine.getPeliculasSize());
         assertEquals(7,cine.salas.size());
-
 
     }
 
 
     @Test
-    public void Mostrarbutaca() {
+    public void TestMostrarbutaca() {
         TestAñadirPeliculas();
-        ArrayList<String> butaca = boleteria.MuestraButaca(cine.cartelera, cine.salas);
+        ArrayList<String> butaca = boleteria.muestraButaca(cine.cartelera, cine.salas);
 
         System.out.print(butaca.get(1));
     }
 
     @Test
     public void TestOcuparcAsiento () {
-        boleteria.OcuparAsiento(sala1,"A", 2);
+        boleteria.ocuparAsiento(sala1,"2A");
     }
 
     @Test
     public void TestOcuparAsiento () {
-        boleteria.OcuparAsiento(sala1,"A", 2);
+        boleteria.ocuparAsiento(sala1,"4B");
     }
 
     @Test
     public void RegistrarPersona(){
         TestAñadirPeliculas();
-        boleteria.RegistarCliente(persona1);
-        persona1.AñadirPersonaCorreo("julian@gmail.com");
-        System.out.println(persona1.MostrarDatosCliente());
+        boleteria.registarCliente(persona1);
+        persona1.añadirPersonaCorreo("julian@gmail.com");
+        System.out.println(persona1.mostrarDatosCliente());
+        //assertEquals();
     }
 
     @Test
+    public void TestRetornarPelicula(){
+            cine.retornarPelicula("Batman");
+            //assertEquals();
+    }
+
+
+
+    @Test
+
     public void TestAsignarPuntos () {
 
-        double puntos = persona1.MostrarPuntos();
+        double puntos = persona1.getPuntos();
 
-        persona1.addPuntos(7, 50, 50);
+        persona1.addPuntos(7, 50, 10);
+        persona2.addPuntos(9,50);
+        assertEquals(450,persona1.getPuntos());
+        assertEquals(35,persona1.getPuntos());
 
-        System.out.println(persona1.MostrarPuntos());
+
+    }
+
+    @Test
+    public void TestVerificacion(){
+        TestAñadirPersonas();
+        System.out.println(boleteria.verificacionDeRegistro(343243));
+        assertEquals(true,boleteria.verificacionDeRegistro(343243));
+        assertEquals(false,boleteria.verificacionDeRegistro(5254563));
     }
 
     @Test
     public void TestActualizardia(){
-        boleteria.ActualizarDia("jueves");
+        boleteria.actualizarDia("jueves");
+        assertEquals("jueves", boleteria.getDia());
     }
 
     @Test
     public void mostarFactura(){
         String factura =boleteria.mostarFactura(cine , pelicula1 );
         System.out.println(factura);
-        assertEquals("CINE CENTER  nit:73238 Jurassic World" , factura);
+        assertEquals("PREMIER  nit:16717 Jurassic World" , factura);
 
     }
     @Test
@@ -155,18 +185,30 @@ public class TestCine {
     @Test
     public void TestActualizarAsientos(){
         System.out.println(sala1.ActualizarAsientos());
-        boleteria.OcuparAsiento(sala1,"A", 2);
-        boleteria.OcuparAsiento(sala1,"A", 5);
-        boleteria.OcuparAsiento(sala1,"A", 7);
-        boleteria.OcuparAsiento(sala1,"A", 8);
+        boleteria.ocuparAsiento(sala1,"10B");
+        boleteria.ocuparAsiento(sala2,"5A");
+        boleteria.ocuparAsiento(sala3,"7A");
+        boleteria.ocuparAsiento(sala4,"9C");
         System.out.println(sala1.ActualizarAsientos());
+
     }
 
     @Test
     public void TestEdad() {
-        assertEquals(22, persona1.getEdadPersona());
-        //assertEquals(22, persona2.getEdadPersona());
-        //assertEquals(23, persona3.getEdadPersona());
+        assertEquals(22, persona8.getEdadPersona());
+        assertEquals(22, persona9.getEdadPersona());
+        assertEquals(22, persona10.getEdadPersona());
+    }
+    @Test
+    public void TestComprarBoletos(){
+            boleteria.comprarBoletos(ClasificarEdad.ADULTO_MAYOR,5,pelicula1,"EFECTIVO","Los Elefantes");
+
+            //
+    }
+    @Test
+    public void TestComprraBoletos(){
+            boleteria.comprarBoletos(ClasificarEdad.INFANTE,3,pelicula1,"TARJETA_DE_CREDITO","Los elefantes");
+        System.out.println(boleteria.mostarFactura(cine,pelicula1));
     }
     /*
     @Test

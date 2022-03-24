@@ -114,3 +114,148 @@
                 // DATOS A MEJORAR
 
 
+
+    public void menuBoleteria() {
+        System.out.println("***BOLETERIA DEL CINE POOI***");
+
+        System.out.println("Que pelicula desea ver?");
+        menuPeliculas();
+
+        System.out.println("Escoja un horario: ");
+
+        System.out.println("****BOLETERIA***"
+                            +"1. Ver Cartelera\n"
+                            +"2. Comprar Boletos\n"
+                            +"3. Canjear Puntos");
+        System.out.println("\nIngrese la opcion a seguir: ");
+        int opcion = scanner.nextInt();
+
+        switch (opcion) {
+            case 1:
+                menuPeliculas();
+                break;
+            case 2:
+                System.out.println("\nCOMPRA DE BOLETOS");
+
+                System.out.println("\nComprar boletos para:\n "
+                +"1. Niños (hasta los  10 años\n)"
+                +"2. Adulto\ns"
+                +"3. Adultos Mayores");
+
+                System.out.println("\nIngrese el tipo de boleto a comprar: ");
+                int seleccion = scanner.nextInt();
+
+                ClasificarEdad edad;
+
+                switch (seleccion){
+                    case 1:
+                        edad = ClasificarEdad.INFANTE;
+                        break;
+                    case 2:
+                        edad = ClasificarEdad.ADULTO;
+                        break;
+                    case 3:
+                        edad = ClasificarEdad.ADULTO_MAYOR;
+                        break;
+                    default:
+                        System.out.println("");
+                }
+
+                System.out.println("Ingrese la cantidad de boletos que comprara:");
+                int cantidad = scanner.nextInt();
+                System.out.println("\n");
+
+                boleteria.comprarBoletos(ClasificarEdad.ADULTO_MAYOR, cantidad, pelicula7, TipoDePago. EFECTIVO, "");
+
+                boleteria.comprarBoletos(ClasificarEdad.INFANTE,4, pelicula1, TipoDePago.TARJETA_DE_CREDITO, "Los Elefantes");
+                System.out.println("GRACIAS POR SU COMPRA!!");
+                System.out.println("Vuelva prontos");
+
+                if(boleteria.Verificacion_de_Registro(cliente) == 1){
+                    cliente.addPuntos(cantidad, 10, 0.50);
+                }
+
+                break;
+            case 3:
+                if(boleteria.Verificacion_de_Registro(cliente) == 1){
+                    boleteria.canjearSouvenirs(cliente, "Awa");
+                }
+                else{
+                    System.out.println("Debe registrarse para poder obtener el beneficio de puntos");
+                }
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida, en el rango de 1-3");
+        }
+    }
+
+    Miercoles 23 de marzo
+
+    public void menuPrincipal() {
+            System.out.println("********BIENVENIDOS********\n "
+                                +"Seleccione una opcion de servicio:\n"
+                                +"1.  Usuario Registrado\n"
+                                +"2.  Registrase\n"
+                                +"3.  Sin Registarse\n"
+                                +"4.  Salir \n "
+                                +"Ingrese la opcion a seguir");
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("Ingrese su numero de carnet");
+                    int numeroCarnet = scanner.nextInt();
+                    Cliente cliente = new Cliente(numeroCarnet);
+                   if (boleteria.verificacionDeRegistro(cliente)== true)
+                    {
+                        System.out.println("Usuario Registrado");
+                        menuBoleteria();
+
+                    }else{
+                        System.out.println("Usuario no registrado");
+                        menuPrincipal();
+                    }
+
+                case 2:
+                    System.out.println("Ingrese su  Nombre");
+                    String nombrePersona = scanner.next();
+                    System.out.println("Ingrese su numero de carnet de Identidad");
+                    int carnetIdentidad = scanner.nextInt();
+                    System.out.println("Ingrese su fecha de Nacimiento de la siguiente forma dd/MM/yyyy");
+                    String fechaNacimiento = scanner.next();
+                    System.out.println("Ingrese su correo electronico");
+                    String correoElectronico = scanner.next();
+                    System.out.println("Ingrese su nacionalidad");
+                    String nacionalidad = scanner.next();
+
+                    ClasificarEdad edad_Clasificada= boleteria.clasificarEdad(fechaNacimiento);
+                    Cliente cliente_R = new Cliente(nombrePersona,carnetIdentidad,fechaNacimiento,correoElectronico,nacionalidad,edad_Clasificada);
+                    if (boleteria.verificacionDeRegistro(cliente_R)== true) {
+                        cliente = cliente_R;
+                        boleteria.añadirCliente(cliente);
+                        System.out.println("Registro Exitoso");
+                    }else{
+                        System.out.println("El cliente ya se encuentra registrado");
+                    }
+                    menuBoleteria();
+
+                case 3:
+                    System.out.println("Ingrese su nombre");
+                    String nombre=scanner.next();
+                    System.out.println("Ingrese su fecha de nacimiento ");
+                    String fecha =scanner.next();
+                    System.out.println("Ingrese su carnet de Identidad");
+                    int carnetI= scanner.nextInt();
+                    ClasificarEdad edad = boleteria.clasificarEdad(fecha);
+                    Cliente cliente1= new Cliente(nombre , carnetI , edad);
+                    menuBoleteria();
+                    break;
+
+
+                case 4:
+                    break;
+                default:
+                    System.out.println("Ingrese uno de los servicios indicados en pantalla");
+            }
+
+        }

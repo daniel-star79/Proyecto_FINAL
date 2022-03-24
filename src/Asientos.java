@@ -1,7 +1,7 @@
 public class Asientos {
     // write your code here
-    String  letraFila ;
-    int numeroAciento;
+    private String  letraFila ;
+    private int numeroAciento;
     boolean estado ;
     public Asientos(String Fila , int numeroAciento){
         this.letraFila = Fila;

@@ -1,5 +1,3 @@
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Cine {
@@ -41,15 +39,15 @@ public class Cine {
     }
 
 //Métodos para agregar objetos a los ArrayList
-    public void AddSala(Sala sala){
+    public void addSala(Sala sala){
         salas.add(sala);
     }
 
-    public void AddPelicula(Pelicula pelicula){
+    public void addPelicula(Pelicula pelicula){
         cartelera.add(pelicula);
     }
 
-    public void AddEmpleado(Empleado empleado){
+    public void addEmpleado(Empleado empleado){
         empleados.add(empleado);
     }
 
@@ -72,9 +70,9 @@ public class Cine {
        }
 
 
-     public String RegistrarCliente(Cliente cliente){
+     public String registrarCliente(Cliente cliente){
         String registro = "";
-        if(cliente.correoElectronico != null){
+        if(cliente.getCorreoElectronico()!= null){
             for(Cliente c:clientesRegistrados){
                     if(cliente.equals(c)){
                         registro =  "Ya registrado";
@@ -86,16 +84,24 @@ public class Cine {
         }
         return registro;
      }
-
-
-     public Pelicula RetornarPelicula(String peli_entrada){
-        Pelicula peli_salida = null;
-        for(Pelicula p:cartelera){
-            if(p.getNombrePelicula().equals(peli_entrada)){
-                peli_salida = p;
+    public Sala retornarSala(String sala_letras){
+        Sala sala_retorno= null;
+        for(Sala s:salas){
+            if(s.getIDSala().equals(sala_letras)){
+                sala_retorno = s;
             }
         }
-        return peli_salida;
+        return sala_retorno;
+    }
+
+     public Pelicula retornarPelicula(String peliEntradaa){
+        Pelicula peliSalida = null;
+        for(Pelicula p:cartelera){
+            if(p.getNombrePelicula().equals(peliEntradaa)){
+                peliSalida = p;
+            }
+        }
+        return peliSalida;
      }
 
 }

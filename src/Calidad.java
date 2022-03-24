@@ -3,8 +3,6 @@ public enum Calidad {
     TERCERA_DIMENSION("3D"),
     SEGUNDA_DIMENSION("2D");
 
-
-
     Calidad(String calidad) {
         this.calidad = calidad;
     }
