@@ -9,6 +9,10 @@ public class Asientos {
         estado = true;
     }
 
+    public void setLetraFila(String letraFila) {
+        this.letraFila = letraFila;
+    }
+
     public void setEstado(boolean estado) {
         this.estado = estado;
     }

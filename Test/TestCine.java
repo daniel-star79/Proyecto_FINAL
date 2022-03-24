@@ -41,7 +41,7 @@ public class TestCine {
 
 
         @Test
-        public void AñadirDescuentos(){
+        public void TestAñadirDescuentos(){
             boleteria.añadirDescuento("ADULTO_MAYOR",50);
             boleteria.añadirDescuento("Miercoles",50);
             boleteria.añadirDescuento("INFANTE",15);
@@ -178,19 +178,20 @@ public class TestCine {
         assertEquals("PREMIER  nit:16717 Jurassic World" , factura);
 
     }
+
     @Test
     public void CalcularEdad(){
 
     }
     @Test
     public void TestActualizarAsientos(){
+            sala1.CrearAsientos();
         System.out.println(sala1.ActualizarAsientos());
         boleteria.ocuparAsiento(sala1,"10B");
-        boleteria.ocuparAsiento(sala2,"5A");
-        boleteria.ocuparAsiento(sala3,"7A");
-        boleteria.ocuparAsiento(sala4,"9C");
+        boleteria.ocuparAsiento(sala1,"5A");
+        boleteria.ocuparAsiento(sala1,"7A");
+        boleteria.ocuparAsiento(sala1,"9C");
         System.out.println(sala1.ActualizarAsientos());
-
     }
 
     @Test
@@ -199,17 +200,20 @@ public class TestCine {
         assertEquals(22, persona9.getEdadPersona());
         assertEquals(22, persona10.getEdadPersona());
     }
-    @Test
-    public void TestComprarBoletos(){
-            boleteria.comprarBoletos(ClasificarEdad.ADULTO_MAYOR,5,pelicula1,"EFECTIVO","Los Elefantes");
 
-            //
+    @Test
+    public void TestPrecioBoletos(){
+            int  precioCalidad = boleteria.precioBoleto(pelicula1.getCalidad());
+            assertEquals(35,precioCalidad);
     }
     @Test
     public void TestComprraBoletos(){
+                TestAñadirDescuentos();
             boleteria.comprarBoletos(ClasificarEdad.INFANTE,3,pelicula1,"TARJETA_DE_CREDITO","Los elefantes");
-        System.out.println(boleteria.mostarFactura(cine,pelicula1));
+        System.out.println(boleteria.getPrecioTotal());
     }
+
+
     /*
     @Test
     public void TestCangeoPuntos(){

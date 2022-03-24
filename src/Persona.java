@@ -9,6 +9,7 @@ public class Persona {
         //this.fechaNacimiento = fechaNacimiento;
         this.carnetIdentidad = carnetIdentidad;
     }
+
     public Persona(int carnetIdentidad){
         this.carnetIdentidad=carnetIdentidad;
     }
@@ -27,6 +28,10 @@ public class Persona {
 
     public void setCarnetIdentidad(int carnetIdentidad) {
         this.carnetIdentidad = carnetIdentidad;
+    }
+
+    public ClasificarEdad getClasificarEdad() {
+        return clasificarEdad;
     }
 
     @Override
