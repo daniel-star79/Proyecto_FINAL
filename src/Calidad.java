@@ -7,7 +7,7 @@ public enum Calidad {
         this.calidad = calidad;
     }
 
-    public String MostrarAbreviatura(){
+    public String MostrarAbreviatura() {
         return calidad;
     }
 

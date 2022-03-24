@@ -1,8 +1,9 @@
-public class Empleado extends Persona{
+public class Empleado extends Persona {
     Cargo cargoEmpleado;
     private String fechaNacimineto;
-    public Empleado(String nombrePersona , int carnetIdentidad , String fechaNacimiento, Cargo cargoEmpleado, ClasificarEdad edad){
-        super(nombrePersona,carnetIdentidad,edad);
+
+    public Empleado(String nombrePersona, int carnetIdentidad, String fechaNacimiento, Cargo cargoEmpleado, ClasificarEdad edad) {
+        super(nombrePersona, carnetIdentidad, edad);
         this.cargoEmpleado = cargoEmpleado;
         this.fechaNacimineto = fechaNacimiento;
     }

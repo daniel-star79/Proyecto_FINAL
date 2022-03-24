@@ -1,3 +1,4 @@
+
 import java.util.Calendar;
 
 public class Cliente extends Persona {
@@ -5,13 +6,15 @@ public class Cliente extends Persona {
     private String correoElectronico;
     private String nacionalidad;
     private String fechaNacimiento;
-    public Cliente(String nombrePersona, int carnetIdentidad, String fechaNacimiento, String correoElectronico , String nacionalidad, ClasificarEdad clasificarEdad){
+
+    public Cliente(String nombrePersona, int carnetIdentidad, String fechaNacimiento, String correoElectronico, String nacionalidad, ClasificarEdad clasificarEdad) {
         super(nombrePersona, carnetIdentidad, clasificarEdad);
         this.fechaNacimiento = fechaNacimiento;
         this.nacionalidad = nacionalidad;
         this.correoElectronico = correoElectronico;
     }
-    public Cliente(String nombrePersona,  int  carnetIdentidad, ClasificarEdad edad){
+
+    public Cliente(String nombrePersona, int carnetIdentidad, ClasificarEdad edad) {
         super(nombrePersona, carnetIdentidad, edad);
     }
 
@@ -19,50 +22,47 @@ public class Cliente extends Persona {
         return correoElectronico;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public String getNombre(){
+        return nombrePersona;
     }
 
-    public String getNacionalidad() {
-        return nacionalidad;
-    }
-
-    public void setNacionalidad(String nacionalidad) {
-        this.nacionalidad = nacionalidad;
-    }
-
-    public void añadirPersonaCorreo(String correoElectronico){
-        this.correoElectronico = correoElectronico;
-    }
-
-    public String mostrarDatosCliente(){
-        return  "nombre Persona : "+nombrePersona+"\n"+
-                "carnet de Identidad : "+carnetIdentidad+"\n"+
-                "fecha Nacimiento : "+fechaNacimiento+"\n"+
-                "correoElectronico : "+correoElectronico+"\n"+
-                "Puntos Acumulados : "+cantidadpuntos+"\n";
-    }
-
-
-
-
-
-    public void  addPuntos(int entradas , int puntosPorCompra){
-        cantidadpuntos = entradas*puntosPorCompra;
+    public boolean compraPorPuntos(int PuntosPorBoleto , int voletos){
+        if(PuntosPorBoleto * voletos>cantidadpuntos){
+            return false;
+        }else{
+            cantidadpuntos -= PuntosPorBoleto * voletos;
+            return true;
         }
-
-    public void addPuntos(int entradas, int puntos_x_compra, double descuento){
-        cantidadpuntos = ((entradas*puntos_x_compra*descuento)/100);
+    }
+    public void añadirPersonaCorreo(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
     }
 
-    public  double getPuntos(){
+    public String mostrarDatosCliente() {
+        return "Nombre Personas : " + nombrePersona + "\n" +
+                "Carnet de Identidad : " + carnetIdentidad + "\n" +
+                "Fecha Nacimiento : " + fechaNacimiento + "\n" +
+                "Correo Electronico : " + correoElectronico + "\n" +
+                "Puntos Acumulados : " + cantidadpuntos + "\n";
+    }
+
+    public void addPuntos(int entradas, int puntosPorCompra) {
+        cantidadpuntos = entradas * puntosPorCompra;
+    }
+
+    public void addPuntos(int entradas, int puntos_x_compra, double descuento) {
+        cantidadpuntos = ((entradas * puntos_x_compra * descuento) / 100);
+    }
+
+    public double getPuntos() {
         return cantidadpuntos;
     }
 
-    public void actuaizarPutos(int puntos_a_Descontar){
-            cantidadpuntos-=puntos_a_Descontar;
+    public void actuaizarPutos(int puntos_a_Descontar) {
+        cantidadpuntos -= puntos_a_Descontar;
     }
-    public int getEdadPersona(){
+
+    public int getEdadPersona() {
         // d d / m m / y y y y
         // 0 1 2 3 4 5 6 7 8 9
         String añoNacimineto = fechaNacimiento.substring(6);
@@ -76,7 +76,7 @@ public class Cliente extends Persona {
         Calendar actual = Calendar.getInstance();
 
         int edad = actual.get(Calendar.YEAR) - nacimineto.get(Calendar.YEAR);
-        if (nacimineto.get(Calendar.DAY_OF_YEAR) > actual.get(Calendar.DAY_OF_YEAR)){
+        if (nacimineto.get(Calendar.DAY_OF_YEAR) > actual.get(Calendar.DAY_OF_YEAR)) {
             edad--;
         }
         return edad;

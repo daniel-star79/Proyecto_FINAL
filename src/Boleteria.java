@@ -3,19 +3,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Boleteria {
-    private String dia = "Miercoles";
-    private String nuevoDia;
-    private ClasificarEdad edad;
-    private ArrayList<String> Butaca;
+    private String dia ="";
+    private String nuevoDia = "";
+    private ClasificarEdad edad ;
+    private int puntosPorCompra;
+    private int precio2D, precio3D;
+    private ArrayList<String> Butaca ;
     private Map<String, Integer> souvenirs;
     private Map<String, Integer> descuentos;
     private Map<String, TipoDePago> bancos;
-    private int puntos_por_compra = 50;
-    private int  precio2D, precio3D;
     private ArrayList<Cliente> listaclientes;
-    private ArrayList<Banco> listaBancos;
-    private double precioTotal = 0;
     private ArrayList<String> asientosComprados;
+    private double precioTotal = 0;
     private String asientoComprado;
 
     public Boleteria(int precio3D, int precio2D) {
@@ -25,7 +24,6 @@ public class Boleteria {
         souvenirs = new HashMap<>();
         descuentos = new HashMap<>();
         bancos = new HashMap<>();
-        listaBancos = new ArrayList<>();
         listaclientes = new ArrayList<>();
         asientosComprados = new ArrayList<>();
 
@@ -33,10 +31,6 @@ public class Boleteria {
 
     public void añadirCliente(Cliente cliente) {
         listaclientes.add(cliente);
-    }
-
-    public int getPuntosPorCompra() {
-        return puntos_por_compra;
     }
 
     public void actualizarDia(String dia) {
@@ -51,23 +45,34 @@ public class Boleteria {
         return bancos.size();
     }
 
-
-    public double getPrecio2D() {
-        return precio2D;
-    }
-
-    public double getPrecio3D() {
-        return precio3D;
-    }
-
     public String getDia() {
         return dia;
+    }
+
+    public double getPrecioTotal() {
+        return precioTotal;
+    }
+
+    public int sizeCliente() {
+        return listaclientes.size();
+    }
+
+    public void añadirDescuento(String nombreDescuento, int porcentaje) {
+        descuentos.put(nombreDescuento, porcentaje / 100);
+    }
+
+    public void añadirBancos(String nombreDelBanco, TipoDePago tipoDePago) {
+        bancos.put(nombreDelBanco, tipoDePago);
     }
 
     public void controlDeAsientos(Sala sala) {
         if (sala.listaAsientos.size() == 12) {
 
         }
+    }
+
+    public int getPuntosPorCompra() {
+        return puntosPorCompra;
     }
 
     // ARREGLAR Y OPTIMIZAR MUESTRA BUTACA
@@ -85,9 +90,8 @@ public class Boleteria {
         String color = "\u001B[32m";
         return "\u001B[37m" + peliculas.getNombrePelicula() + " " + sala.IDSala + " " + peliculas.getCalidad().MostrarAbreviatura() + " \n" +
                 "" + color + Horario.MAÑANA.toString() + "\n" + color + Horario.TARDE.toString() + "\n" + color + Horario.NOCHE.toString() + "\n" +
-                "" + color + Horario.PRENOCHE.toString() + "\n" + color + Horario.MAÑANA.toString() + "\n"+"\033[36m";
+                "" + color + Horario.PRENOCHE.toString() + "\n" + color + Horario.MAÑANA.toString() + "\n" + "\033[36m";
     }
-
 
     public void addSouvenirs(String souvenir, int cantidad) {
         souvenirs.put(souvenir, cantidad);
@@ -98,7 +102,7 @@ public class Boleteria {
     }
 
 
-    public void  ocuparAsiento(Sala sala, String codigo) {
+    public void ocuparAsiento(Sala sala, String codigo) {
         int cantidadDigitos = codigo.length();
         String fila = "";
         int columna = 0;
@@ -115,117 +119,95 @@ public class Boleteria {
                     a.estado = false;
 
                 } else {
-                    System.out.println("\033[31m"+"El Asiento se encuentra ocupado");
+                    System.out.println("\033[31m" + "El Asiento se encuentra ocupado");
                 }
                 break;
             }
         }
     }
 
-        public int  precioBoleto (Calidad calidadPelicula){
-            int  precio = 0;
-            if (calidadPelicula.MostrarAbreviatura().equals("3D")) {
-                precio = precio3D;
-            } else {
-                if (calidadPelicula.MostrarAbreviatura().equals("2D")) {
-                    precio = precio2D;
-                }
-            }
-            return precio;
-        }
-
-        public String mostarFactura (Cine cine, Pelicula pelicula){
-            return cine.toString() + " " + pelicula.getNombrePelicula();
-        }
-        public String getAsientoComprado(){
-            return asientoComprado;
-        }
-        public void setAsientoComprado(String asientoComprado){
-                this.asientoComprado = asientoComprado;
-        }
-        public void addAsientocomprado(){
-            asientosComprados.add(asientoComprado);
-        }
-        public int getListaAsientosComprados(){
-            return asientosComprados.size();
-        }
-
-        public void comprarBoletos (ClasificarEdad edad,int cantidadBoletos, Pelicula pelicula, String metodoDePago, String banco){
-            double precioBoleto = precioBoleto(pelicula.getCalidad());
-            if ("Miercoles".equals(dia)) {
-                precioTotal = precioBoleto * descuentos.get("Miercoles");
-            } else if (edad == ClasificarEdad.ADULTO_MAYOR) {
-                precioTotal = precioBoleto * descuentos.get("ADULTO_MAYOR");
-            } else if (edad == ClasificarEdad.INFANTE || pelicula.getGenero().equals(Genero.ANIMACION)) {
-                precioTotal = precioBoleto * descuentos.get("INFANTE");
-            }
-
-            precioTotal = precioTotal + cantidadBoletos * precio3D + cantidadBoletos * precio2D;
-            TipoDePago tipoDePagoPrueva = Enum.valueOf(TipoDePago.class, metodoDePago);
-            if (dia.equals("Jueves") || tipoDePagoPrueva.equals(TipoDePago.TARJETA_DE_CREDITO) || banco.equals("Los Elefantes")) {
-                precioTotal = precioBoleto * descuentos.get("BANCO");
-            }
-            System.out.println("compra exitosa");
-        }
-
-        public boolean verificacionDeTrabajoBanco (String banco){
-            return listaBancos.contains(banco);
-        }
-
-
-        public ClasificarEdad clasificarEdad (String edad){
-            //          00/00/0000
-            int edad_entero = Integer.parseInt(edad.substring(6));
-            edad_entero = 2022 - edad_entero;
-            ClasificarEdad edad_Clasificada = null;
-            if (edad_entero <= 10) {
-                edad_Clasificada = ClasificarEdad.INFANTE;
-            } else if (edad_entero <= 23 && edad_entero > 10) {
-                edad_Clasificada = ClasificarEdad.ADOLECENTE;
-            } else if (edad_entero <= 49 && edad_entero > 23) {
-                edad_Clasificada = ClasificarEdad.ADULTO;
-            } else if (edad_entero > 59) {
-                edad_Clasificada = ClasificarEdad.ADULTO_MAYOR;
-            }
-            return edad_Clasificada;
-        }
-        public void canjearSouvenirs (Cliente cliente, String souvenir){
-            for (Map.Entry<String, Integer> s : souvenirs.entrySet()) {
-                if (s.getKey().equals(souvenir) && s.getValue() < cliente.getPuntos()) {
-                    cliente.actuaizarPutos(s.getValue());
-                }
+    public int precioBoleto(Calidad calidadPelicula) {
+        int precio = 0;
+        if (calidadPelicula.MostrarAbreviatura().equals("3D")) {
+            precio = precio3D;
+        } else {
+            if (calidadPelicula.MostrarAbreviatura().equals("2D")) {
+                precio = precio2D;
             }
         }
-
-
-        public boolean verificacionDeRegistro ( int carnet){
-            boolean verificacion = false;
-            for (Cliente c : listaclientes) {
-                if (carnet == c.getCarnetIdentidad()) {
-                    verificacion = true;
-                    break;
-                }
-            }
-            return verificacion;
-        }
-        public int sizeCliente () {
-            return listaclientes.size();
-        }
-
-        public void setClasificacionEdad (ClasificarEdad edad){
-            this.edad = edad;
-        }
-
-    public double getPrecioTotal() {
-        return precioTotal;
+        return precio;
     }
 
-    public void añadirDescuento (String nombreDescuento , int porcentaje){
-            descuentos.put(nombreDescuento, porcentaje / 100);
+    public String mostarFactura(Cine cine, Pelicula pelicula, Cliente cliente) {
+        System.out.println("***FACTURA***");
+        System.out.println("Gracias por su Preferencia");
+        return cine.toString() + "\n" + pelicula.getNombrePelicula()+ "\n" + "Factura a nombre de: " + cliente.getNombre() + "Pagando un Total de: " + precioTotal;
+    }
+
+    public String getAsientoComprado() {
+        return asientoComprado;
+    }
+
+    public void setAsientoComprado(String asientoComprado) {
+        this.asientoComprado = asientoComprado;
+    }
+
+    public void addAsientocomprado() {
+        asientosComprados.add(asientoComprado);
+    }
+
+    public void comprarBoletos(ClasificarEdad edad, int cantidadBoletos, Pelicula pelicula, String metodoDePago, String banco) {
+        double precioBoleto = precioBoleto(pelicula.getCalidad());
+        if ("Miercoles".equals(dia)) {
+            precioTotal = precioBoleto * descuentos.get("Miercoles");
+        } else if (edad == ClasificarEdad.ADULTO_MAYOR) {
+            precioTotal = precioBoleto * descuentos.get("ADULTO_MAYOR");
+        } else if (edad == ClasificarEdad.INFANTE || pelicula.getGenero().equals(Genero.ANIMACION)) {
+            precioTotal = precioBoleto * descuentos.get("INFANTE");
         }
-        public void añadirBancos (String nombreDelBanco, TipoDePago tipoDePago){
-            bancos.put(nombreDelBanco, tipoDePago);
+
+        precioTotal = precioTotal + cantidadBoletos * precio3D + cantidadBoletos * precio2D;
+        TipoDePago tipoDePagoPrueva = Enum.valueOf(TipoDePago.class, metodoDePago);
+        if (dia.equals("Jueves") || tipoDePagoPrueva.equals(TipoDePago.TARJETA_DE_CREDITO) || banco.equals("Los Elefantes")) {
+            precioTotal = precioBoleto * descuentos.get("BANCO");
         }
+        System.out.println("compra exitosa");
+    }
+
+    public ClasificarEdad clasificarEdad(String edad) {
+        int edad_entero = Integer.parseInt(edad.substring(6));
+        edad_entero = 2022 - edad_entero;
+        ClasificarEdad edad_Clasificada = null;
+        if (edad_entero <= 10) {
+            edad_Clasificada = ClasificarEdad.INFANTE;
+        } else if (edad_entero <= 23 && edad_entero > 10) {
+            edad_Clasificada = ClasificarEdad.ADOLECENTE;
+        } else if (edad_entero <= 49 && edad_entero > 23) {
+            edad_Clasificada = ClasificarEdad.ADULTO;
+        } else if (edad_entero > 59) {
+            edad_Clasificada = ClasificarEdad.ADULTO_MAYOR;
+        }
+        return edad_Clasificada;
+    }
+
+    public void canjearSouvenirs(Cliente cliente, String souvenir) {
+        for (Map.Entry<String, Integer> s : souvenirs.entrySet()) {
+            if (s.getKey().equals(souvenir) && s.getValue() < cliente.getPuntos()) {
+                cliente.actuaizarPutos(s.getValue());
+            }
+        }
+    }
+
+    public boolean verificacionDeRegistro(int carnet) {
+        boolean verificacion = false;
+        for (Cliente c : listaclientes) {
+            if (carnet == c.getCarnetIdentidad()) {
+                verificacion = true;
+                break;
+            }
+        }
+        return verificacion;
+    }
 
 
 }

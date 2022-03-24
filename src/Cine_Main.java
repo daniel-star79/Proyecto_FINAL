@@ -37,7 +37,11 @@ Cine_Main {
         cine.addSala(sala5);
         cine.addSala(sala6);
         cine.addSala(sala7);
-
+    }
+    public void AñadirSouvenirs(){
+        boleteria.addSouvenirs("PIPOCAS",200);
+        boleteria.addSouvenirs("GORRA", 350);
+        boleteria.addSouvenirs("CHOMPA",500);
     }
 
 
@@ -48,7 +52,6 @@ Cine_Main {
         boleteria.añadirDescuento("BANCO",12);
     }
     public void AñadirPeliculas() {
-
         AñadirSalas();
         cine.addPelicula(pelicula1);
         cine.addPelicula(pelicula2);
@@ -57,7 +60,6 @@ Cine_Main {
         cine.addPelicula(pelicula5);
         cine.addPelicula(pelicula6);
         cine.addPelicula(pelicula7);
-
     }
 
     public void AñadirBancos() {
@@ -131,8 +133,10 @@ Cine_Main {
     }
 
     public void menuBoleteria() {
+        añadirDescuentos();
         actualizar_dia();
         String peli = "";
+        AñadirBancos();
         System.out.println("***BOLETERIA DEL CINE POOI***" + "\n");
         System.out.println("****BOLETERIA***" + "\n" + "\033[36m"
                 + "1. Ver Cartelera\n"
@@ -176,7 +180,7 @@ Cine_Main {
                 for (int i = 0; i < cantidad_de_boletos; i++) {
                     System.out.println("Que asientos desea");
                     boleteria.setAsientoComprado(scanner.next().toUpperCase());
-                    boleteria.ocuparAsiento(sala1, boleteria.getAsientoComprado());         //
+                    boleteria.ocuparAsiento(sala1, boleteria.getAsientoComprado());
                     System.out.println(sala1.ActualizarAsientos());
                     boleteria.addAsientocomprado();
                 }
@@ -184,11 +188,22 @@ Cine_Main {
                 System.out.println("Metodo de pago" + "\033[36m" +
                         "\nEFECTIVO , TARJETA_DE_CREDITO , TARJETA_DE_DEBITO , QR ,PUNTOS ");
                 String metodoPago = scanner.next().toUpperCase();
-                if (metodoPago.equals("EFECTIVO")) {
-                    System.out.println(boleteria.mostarFactura(cine, peliculaEscogida));
-                } else {
-                    System.out.println("\033[34m" + "Ingrese su Banca Movil");
-                    String banco = scanner.next();
+                switch (metodoPago) {
+                    case "EFECTIVO":
+                        System.out.println(boleteria.mostarFactura(cine, peliculaEscogida, clienteRegistrado));
+                        break;
+                    case "PUNTOS":
+                      if(clienteRegistrado.compraPorPuntos(50,cantidad_de_boletos)){
+                        System.out.print("Se descontaron sus puntos");
+                        System.out.println("Puntos actuales :"+clienteRegistrado.getPuntos());
+                        }else{
+                          System.out.println("No tiene los puntos suficientes consulte otro metodo de pago");
+                        }
+                        break;
+                        default:
+                        System.out.println("\033[34m" + "Ingrese su Banca Movil");
+                        String banco = scanner.next();
+                        break;
                 }
                 System.out.println("Ingrese sus datos para imprimir su factura: ");
                 System.out.println("C.I. ");
@@ -200,49 +215,32 @@ Cine_Main {
                     String nombre = scanner.next();
                     System.out.println("Fecha de Nacimiento");
                     ClasificarEdad edadSinRegistro = boleteria.clasificarEdad(scanner.next());
-                        /*
-                        System.out.println("Edad ");
-                        System.out.println("1. Niño\n" +
-                                "2. Adulto\n" +
-                                "3.Adulto Mayor\n");
-                        int opcionEdad = scanner.nextInt();
-                        cliente = new Cliente(nombre,carnet,edadSinRegistro);
-                        switch (opcionEdad) {
-                            case 1:
-                                edadSinRegistro = cliente.clasificarEdad.INFANTE;
-                                break;
-                            case 2:
-                                edadSinRegistro = cliente.clasificarEdad.ADULTO;
-                                break;
-                            case 3:
-                                edadSinRegistro = cliente.clasificarEdad.ADULTO_MAYOR;
-                                break;
-                            default:
-                                System.out.println("Ingrese una opcion valida");
-                        }
-                    */
+                    cliente = new Cliente(nombre,carnet,edadSinRegistro);
                     }
                     añadirDescuentos();
+
                     boleteria.comprarBoletos(cliente.getClasificarEdad(), cantidad_de_boletos, peliculaEscogida, metodoPago, "los elefantes");
                     System.out.println(boleteria.getPrecioTotal());
-                    System.out.println(boleteria.mostarFactura(cine, peliculaEscogida));
+                    System.out.println(boleteria.mostarFactura(cine, peliculaEscogida, cliente));
 
                     System.out.println("GRACIAS POR SU COMPRA!!");
                     System.out.println("Vuelva pronto");
 
-                    System.out.println("Por favor introdusca su carnet de identidad para acumular puntos");
+                    System.out.println("Por favor introduzca su carnet de identidad para acumular puntos");
                     int carId = scanner.nextInt();
                     if (boleteria.verificacionDeRegistro(carId)) {
                         clienteRegistrado.addPuntos(cantidad_de_boletos, boleteria.getPuntosPorCompra(), 50);
                     }
                     break;
+
                     case 3:
                         System.out.println("Ingrese su carnet de Identidad ");
                         int carnetIdentidad = scanner.nextInt();
-                        if (boleteria.verificacionDeRegistro(carnetIdentidad) == true) {
+                        if (boleteria.verificacionDeRegistro(carnetIdentidad)) {
                             System.out.println("Gracias por formar parte de nuestra familia \n Elija una opcion : ");
                             String souvenElegido = scanner.next().toUpperCase();
                             boleteria.canjearSouvenirs(cliente, souvenElegido);
+                            System.out.println("Cangeo exitoso");
                             System.out.println("Gracias por seguir con Nosotros");
                         } else {
                             System.out.println("Debe registrarse para poder cangear puntos");
@@ -261,7 +259,7 @@ Cine_Main {
 
         String nombrePelicula = "";
 
-        System.out.println("Escoja una de las peliculas que se encuentra en nuestra cartelera \n" + "\033[36m" +
+        System.out.println("Peliculas que se encuentra en nuestra cartelera \n" + "\033[36m" +
                 "1." + pelicula1.getNombrePelicula() + "\n" +
                 "2." + pelicula2.getNombrePelicula() + "\n" +
                 "3." + pelicula3.getNombrePelicula() + "\n" +
@@ -313,11 +311,9 @@ Cine_Main {
                 break;
             default:
                 System.out.println("Ingrese una opcion valida, en la lista de peliculas, gracias :) ");
-
         }
         return nombrePelicula;
     }
-
 
     public static void main(String[] args) {
 

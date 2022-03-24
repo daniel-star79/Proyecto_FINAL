@@ -24,9 +24,14 @@ public class TestCine {
         Pelicula pelicula6 = new Pelicula(Genero.ACCION, "Los Vengadores", "3 horas", Horario.MAÑANA, 16,   Calidad.SEGUNDA_DIMENSION);
         Pelicula pelicula7 = new Pelicula(Genero.ANIMACION, "El Rey León", "2 horas", Horario.NOCHE, 16,    Calidad.SEGUNDA_DIMENSION);
 
-        Boleteria boleteria = new Boleteria(25, 35);
+        Boleteria boleteria;
 
-        Cliente persona1 = new Cliente("JUAN", 836839, ClasificarEdad.ADOLECENTE);
+    {
+        int precio3D = 60;
+        boleteria = new Boleteria(precio3D, 40);
+    }
+
+    Cliente persona1 = new Cliente("JUAN", 836839, ClasificarEdad.ADOLECENTE);
         Cliente persona2 = new Cliente("JUANA", 342423, ClasificarEdad.INFANTE);
         Cliente persona3 = new Cliente("JULIAN", 343243, ClasificarEdad.ADULTO);
         Cliente persona4 = new Cliente("JUACHO", 564656, ClasificarEdad.ADULTO);
@@ -114,6 +119,7 @@ public class TestCine {
         ArrayList<String> butaca = boleteria.muestraButaca(cine.cartelera, cine.salas);
 
         System.out.print(butaca.get(1));
+
     }
 
     @Test
@@ -138,10 +144,8 @@ public class TestCine {
     @Test
     public void TestRetornarPelicula(){
             cine.retornarPelicula("Batman");
-            //assertEquals();
+            //assertEquals("Batman" , cine.retornarPelicula("Batman");
     }
-
-
 
     @Test
 
@@ -153,7 +157,6 @@ public class TestCine {
         persona2.addPuntos(9,50);
         assertEquals(450,persona1.getPuntos());
         assertEquals(35,persona1.getPuntos());
-
 
     }
 
@@ -170,15 +173,15 @@ public class TestCine {
         boleteria.actualizarDia("jueves");
         assertEquals("jueves", boleteria.getDia());
     }
-
+/*
     @Test
     public void mostarFactura(){
-        String factura =boleteria.mostarFactura(cine , pelicula1 );
+        String factura =boleteria.mostarFactura(cine,pelicula1, cliente );
         System.out.println(factura);
         assertEquals("PREMIER  nit:16717 Jurassic World" , factura);
 
     }
-
+    */
     @Test
     public void CalcularEdad(){
 
@@ -208,21 +211,9 @@ public class TestCine {
     }
     @Test
     public void TestComprraBoletos(){
-                TestAñadirDescuentos();
-            boleteria.comprarBoletos(ClasificarEdad.INFANTE,3,pelicula1,"TARJETA_DE_CREDITO","Los elefantes");
-        System.out.println(boleteria.getPrecioTotal());
+            TestAñadirDescuentos();
+            boleteria.comprarBoletos(ClasificarEdad.INFANTE,3,pelicula1,"TARJETA_DE_CREDITO","Los Elefantes");
+            System.out.println(boleteria.getPrecioTotal());
     }
-
-
-    /*
-    @Test
-    public void TestCangeoPuntos(){
-        Boleteria cangeo1 =
-    }
-
-    */
-
-
-
 
 }

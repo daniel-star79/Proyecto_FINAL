@@ -12,7 +12,7 @@ public enum Horario {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "horario = " + horario;
     }
 }
